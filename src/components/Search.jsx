@@ -19,6 +19,7 @@ function Search({
 
   async function getCharacterData() {
     setLoading(true);
+    setCharacterData(null);
     const charsArray = characters.split(",").map((name) => name.trim());
 
     const promises = charsArray.map(async (name) => {
@@ -30,18 +31,18 @@ function Search({
         },
         data: {
           query: `query {
-            characterData {
-                character(name: "${name}", serverSlug: "${server}", serverRegion: "${region}") {
-                    zoneRankings(zoneID: ${zone})
-                }
-            }
-        }`,
+                    characterData {
+                        character(name: "${name}", serverSlug: "${server}", serverRegion: "${region}") {
+                            zoneRankings(zoneID: ${zone})
+                        }
+                    }
+                }`,
         },
       });
 
       return {
         name,
-        result: result.data.data.characterData.character,
+        result: result.data.data.characterData.character.zoneRankings,
       };
     });
 

@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { stringify } from "querystring";
-import { Box } from "@mui/material";
+import { Card, Grid } from "@mui/material";
 
 import Filters from "./components/Filters";
 import Search from "./components/Search";
+import Results from "./components/Results";
 
 function App() {
   useEffect(() => {
@@ -58,58 +59,51 @@ function App() {
   return (
     <>
       <h1>Warcraft Group Logs</h1>
-      <form
-        ref={formRef}
-        onSubmit={(e) => {
-          e.preventDefault();
-        }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Filters
-            server={server}
-            setServer={setServer}
-            region={region}
-            setRegion={setRegion}
-            zone={zone}
-            setZone={setZone}
-          />
-          <Search
-            token={token}
-            setLoading={setLoading}
-            characters={characters}
-            setCharacters={setCharacters}
-            server={server}
-            region={region}
-            zone={zone}
-            setCharacterData={setCharacterData}
-            submitForm={submitForm}
-          />
-        </Box>
-      </form>
-
-      <div>
-        {loading && <p>Loading...</p>}
-        {characterData && (
-          <div>
-            {characterData.map((data, index) => (
-              <p key={index}>
-                {data.name}:{" "}
-                {data.result
-                  ? `${data.result.zoneRankings.bestPerformanceAverage.toFixed(
-                      1
-                    )}, ${data.result.zoneRankings.metric}`
-                  : "null"}
-              </p>
-            ))}
-          </div>
-        )}
-      </div>
+      <Grid container spacing={2}>
+        <Grid item md={4}>
+          <form
+            ref={formRef}
+            onSubmit={(e) => {
+              e.preventDefault();
+            }}
+          >
+            <Card
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: "1em",
+               
+              }}
+            >
+              <Filters
+                server={server}
+                setServer={setServer}
+                region={region}
+                setRegion={setRegion}
+                zone={zone}
+                setZone={setZone}
+              />
+              <Search
+                token={token}
+                setLoading={setLoading}
+                characters={characters}
+                setCharacters={setCharacters}
+                server={server}
+                region={region}
+                zone={zone}
+                setCharacterData={setCharacterData}
+                submitForm={submitForm}
+              />
+            </Card>
+          </form>
+        </Grid>
+        <Grid item md={8}>
+          {loading && "Loading..."}
+          <Results characterData={characterData} />
+        </Grid>
+      </Grid>
     </>
   );
 }
