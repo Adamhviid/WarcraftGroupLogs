@@ -1,41 +1,31 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { stringify } from "querystring";
-import "./App.css";
+import { Box } from "@mui/material";
 
-import {
-  Box,
-  Button,
-  TextField,
-  InputLabel,
-  MenuItem,
-  FormControl,
-  Select,
-} from "@mui/material";
+import Filters from "./components/Filters";
+import Search from "./components/Search";
 
 function App() {
-  const [token, setToken] = useState(null);
-  const [characterData, setCharacterData] = useState(null);
-
-  const [characterName, setCharacterName] = useState("");
-  const handleCharacterNameChange = (event) => {
-    setCharacterName(event.target.value);
-  };
-
-  const [server, setServer] = useState("");
-  const handleServerChange = (event) => {
-    setServer(event.target.value);
-  };
-
-  const [region, setRegion] = useState("");
-  const handleRegionChange = (event) => {
-    setRegion(event.target.value);
-  };
-
   useEffect(() => {
     getAccessToken();
-    console.log(token);
   }, []);
+
+  const [token, setToken] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const formRef = useRef();
+
+  const [server, setServer] = useState("");
+  const [region, setRegion] = useState("");
+  const [zone, setZone] = useState("");
+  const [characters, setCharacters] = useState("");
+  const [characterData, setCharacterData] = useState(null);
+
+  const submitForm = () => {
+    if (formRef.current) {
+      formRef.current.dispatchEvent(new Event("submit", { cancelable: true }));
+    }
+  };
 
   async function getAccessToken() {
     const auth = {
@@ -65,62 +55,60 @@ function App() {
     }
   }
 
-  async function getCharacterData() {
-    const result = await axios({
-      url: "https://sod.warcraftlogs.com/api/v2/client",
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      data: {
-        query: `query {
-                characterData {
-                    character(name: "${characterName}", serverSlug: "${server}", serverRegion: "${region}") {
-                        zoneRankings(zoneID: 2008)
-                    }
-                }
-            }`,
-      },
-    });
-
-    setCharacterData(result.data);
-  }
-
   return (
     <>
       <h1>Warcraft Group Logs</h1>
-      <div>
-        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-          <FormControl fullWidth>
-            <InputLabel>Server</InputLabel>
-            <Select value={server} label="Age" onChange={handleServerChange}>
-              <MenuItem value={"Wild-Growth"}>Wild Growth</MenuItem>
-            </Select>
-          </FormControl>
-
-          <FormControl fullWidth>
-            <InputLabel>Region</InputLabel>
-            <Select value={region} label="Age" onChange={handleRegionChange}>
-              <MenuItem value={"EU"}>EU</MenuItem>
-            </Select>
-          </FormControl>
-        </Box>
-        <FormControl fullWidth>
-          <TextField
-            label="Character Name"
-            value={characterName}
-            variant="outlined"
-            onChange={handleCharacterNameChange}
-          />
-        </FormControl>
-        <Button
-          variant="contained"
-          onClick={getCharacterData}
-          disabled={!characterName || !server || !region}
+      <form
+        ref={formRef}
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
         >
-          Search
-        </Button>
-        <p>{characterData && JSON.stringify(characterData, null, 2)}</p>
+          <Filters
+            server={server}
+            setServer={setServer}
+            region={region}
+            setRegion={setRegion}
+            zone={zone}
+            setZone={setZone}
+          />
+          <Search
+            token={token}
+            setLoading={setLoading}
+            characters={characters}
+            setCharacters={setCharacters}
+            server={server}
+            region={region}
+            zone={zone}
+            setCharacterData={setCharacterData}
+            submitForm={submitForm}
+          />
+        </Box>
+      </form>
+
+      <div>
+        {loading && <p>Loading...</p>}
+        {characterData && (
+          <div>
+            {characterData.map((data, index) => (
+              <p key={index}>
+                {data.name}:{" "}
+                {data.result
+                  ? `${data.result.zoneRankings.bestPerformanceAverage.toFixed(
+                      1
+                    )}, ${data.result.zoneRankings.metric}`
+                  : "null"}
+              </p>
+            ))}
+          </div>
+        )}
       </div>
     </>
   );
