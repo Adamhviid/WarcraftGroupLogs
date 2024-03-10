@@ -33,7 +33,7 @@ function App() {
   useEffect(() => {
     const params = new URLSearchParams({ server, region, zone, characters });
     navigate(`?${params}`);
-  }, [server, region, zone, characters]);
+  }, [server, region, zone, characters, navigate]);
 
   const submitForm = () => {
     if (formRef.current) {
@@ -71,7 +71,9 @@ function App() {
 
   return (
     <>
-      <h1>Warcraft Group Logs</h1>
+      <Typography variant="h2" component="div" gutterBottom>
+        Warcraft Group Logs
+      </Typography>
       <Grid container spacing={2}>
         <Grid item md={4}>
           <form
@@ -113,7 +115,12 @@ function App() {
         </Grid>
         <Grid item md={8}>
           {loading && "Loading..."}
-          <Results characterData={characterData} />
+          <Results
+            characterData={characterData}
+            server={server}
+            region={region}
+            zone={zone}
+          />
         </Grid>
       </Grid>
       <Typography variant="body2" align="center" style={{ marginTop: "auto" }}>

@@ -33,6 +33,7 @@ function Search({
           query: `query {
                     characterData {
                         character(name: "${name}", serverSlug: "${server}", serverRegion: "${region}") {
+                            classID
                             zoneRankings(zoneID: ${zone})
                         }
                     }
@@ -42,10 +43,9 @@ function Search({
 
       return {
         name,
-        result: result.data.data.characterData.character.zoneRankings,
+        result: result.data.data.characterData.character,
       };
     });
-
     const results = await Promise.all(promises);
     setCharacterData(results);
     setLoading(false);
