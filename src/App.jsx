@@ -1,15 +1,23 @@
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import { stringify } from "querystring";
-import { Card, Grid } from "@mui/material";
+import { Card, Grid, Typography } from "@mui/material";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import Filters from "./components/Filters";
 import Search from "./components/Search";
 import Results from "./components/Results";
 
 function App() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   useEffect(() => {
     getAccessToken();
+    const queryParams = new URLSearchParams(location.search);
+    setServer(queryParams.get("server") || "");
+    setRegion(queryParams.get("region") || "");
+    setZone(queryParams.get("zone") || "");
+    setCharacters(queryParams.get("characters") || "");
   }, []);
 
   const [token, setToken] = useState(null);
@@ -21,6 +29,11 @@ function App() {
   const [zone, setZone] = useState("");
   const [characters, setCharacters] = useState("");
   const [characterData, setCharacterData] = useState(null);
+
+  useEffect(() => {
+    const params = new URLSearchParams({ server, region, zone, characters });
+    navigate(`?${params}`);
+  }, [server, region, zone, characters]);
 
   const submitForm = () => {
     if (formRef.current) {
@@ -34,7 +47,7 @@ function App() {
       password: import.meta.env.VITE_CLIENT_SECRET,
     };
 
-    const data = stringify({
+    const params = new URLSearchParams({
       grant_type: "client_credentials",
     });
 
@@ -45,7 +58,7 @@ function App() {
         "Content-Type": "application/x-www-form-urlencoded",
       },
       auth: auth,
-      data: data,
+      data: params,
     };
 
     try {
@@ -74,7 +87,6 @@ function App() {
                 alignItems: "center",
                 justifyContent: "center",
                 padding: "1em",
-               
               }}
             >
               <Filters
@@ -104,6 +116,9 @@ function App() {
           <Results characterData={characterData} />
         </Grid>
       </Grid>
+      <Typography variant="body2" align="center" style={{ marginTop: "auto" }}>
+        This application is not affiliated with WarcraftLogs.
+      </Typography>
     </>
   );
 }

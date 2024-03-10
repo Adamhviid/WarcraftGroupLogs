@@ -73,7 +73,7 @@ function Results({ characterData }) {
                       >
                         {data.result.rankings.map((ranking, i) => (
                           <Grid item key={i} md={2}>
-                            <Typography variant="body2">
+                            <Typography variant="body2" component="div">
                               <Grid container direction="column">
                                 <Grid item>
                                   <Typography variant="body3">
