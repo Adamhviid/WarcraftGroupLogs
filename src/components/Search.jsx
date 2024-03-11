@@ -43,7 +43,16 @@ function Search({
 
       return {
         name,
-        result: result.data.data.characterData.character,
+        result: result.data.data.characterData.character
+          ? result.data.data.characterData.character
+          : {
+              classID: 1,
+              zoneRankings: {
+                bestPerformanceAverage: null,
+                medianPerformanceAverage: null,
+                rankings: [],
+              },
+            },
       };
     });
     const results = await Promise.all(promises);

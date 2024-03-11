@@ -6,7 +6,6 @@ import {
   Grid,
   CardActionArea,
 } from "@mui/material";
-import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 
 function Results({ characterData, server, region, zone }) {
   if (!characterData) return null;
@@ -31,7 +30,7 @@ function Results({ characterData, server, region, zone }) {
       2: "#FF7C0A",
       3: "#AAD372",
       4: "#3FC7EB",
-      7: "#FFFFFF",
+      /* 7: "#FFFFFF", */
       8: "#FFF468",
       9: "#0070DD",
       10: "#8788EE",
@@ -99,11 +98,11 @@ function Results({ characterData, server, region, zone }) {
                             ),
                           }}
                         >
-                          Average:{" "}
                           {data.result.zoneRankings.bestPerformanceAverage ===
                           null
-                            ? "N/A"
-                            : data.result.zoneRankings.bestPerformanceAverage.toFixed(
+                            ? null
+                            : "Average: " +
+                              data.result.zoneRankings.bestPerformanceAverage.toFixed(
                                 1
                               )}
                         </Typography>
@@ -115,11 +114,11 @@ function Results({ characterData, server, region, zone }) {
                             ),
                           }}
                         >
-                          Median:{" "}
                           {data.result.zoneRankings.medianPerformanceAverage ===
                           null
-                            ? "N/A"
-                            : data.result.zoneRankings.medianPerformanceAverage.toFixed(
+                            ? null
+                            : "Median: " +
+                              data.result.zoneRankings.medianPerformanceAverage.toFixed(
                                 1
                               )}
                         </Typography>
@@ -133,33 +132,39 @@ function Results({ characterData, server, region, zone }) {
                           justify="space-between"
                           sx={{ width: "100%" }}
                         >
-                          {data.result.zoneRankings.rankings.map(
-                            (ranking, i) => (
-                              <Grid item key={i} md={2}>
-                                <Typography variant="body2" component="div">
-                                  <Grid container direction="column">
-                                    <Grid item>
-                                      <Typography variant="body3">
-                                        Boss{i + 1}
-                                      </Typography>
+                          {data.result.zoneRankings.rankings.length === 0 ? (
+                            <Typography variant="body2">
+                              Character have never been logged on WarcraftLogs
+                            </Typography>
+                          ) : (
+                            data.result.zoneRankings.rankings.map(
+                              (ranking, i) => (
+                                <Grid item key={i} md={2}>
+                                  <Typography variant="body2" component="div">
+                                    <Grid container direction="column">
+                                      <Grid item>
+                                        <Typography variant="body3">
+                                          Boss{i + 1}
+                                        </Typography>
+                                      </Grid>
+                                      <Grid item>
+                                        <Typography
+                                          variant="body2"
+                                          style={{
+                                            color: colorBasedOnRank(
+                                              ranking.rankPercent
+                                            ),
+                                          }}
+                                        >
+                                          {ranking.rankPercent === null
+                                            ? "N/A"
+                                            : ranking.rankPercent.toFixed(1)}
+                                        </Typography>
+                                      </Grid>
                                     </Grid>
-                                    <Grid item>
-                                      <Typography
-                                        variant="body2"
-                                        style={{
-                                          color: colorBasedOnRank(
-                                            ranking.rankPercent
-                                          ),
-                                        }}
-                                      >
-                                        {ranking.rankPercent === null
-                                          ? "N/A"
-                                          : ranking.rankPercent.toFixed(1)}
-                                      </Typography>
-                                    </Grid>
-                                  </Grid>
-                                </Typography>
-                              </Grid>
+                                  </Typography>
+                                </Grid>
+                              )
                             )
                           )}
                         </Grid>

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import { Card, Grid, Typography } from "@mui/material";
+import { Card, Grid, Typography, Link } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom";
 
 import Filters from "./components/Filters";
@@ -71,10 +71,39 @@ function App() {
 
   return (
     <>
-      <Typography variant="h2" component="div" gutterBottom>
-        Warcraft Group Logs
-      </Typography>
-      <Grid container spacing={2}>
+      <div>
+        <Typography variant="h2" component="div" gutterBottom>
+          Warcraft Group Logs
+        </Typography>
+        <Typography variant="p" component="div" gutterBottom>
+          <p>
+            This Website is built with{" "}
+            <Link
+              href="https://www.curseforge.com/members/numberoneplayerkillerhero/projects"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {" "}
+              my addon
+            </Link>{" "}
+            in my mind, for ease of use.{" "}
+            <p>
+              The addon automatically generates a link for this site with
+              region, server, current raid and an array with all party and raid
+              members.
+            </p>
+          </p>
+          <p>
+            Click on any of the players, to go directly to their WarcraftLogs
+            profile, to see an indepth analysis of their performance
+          </p>
+        </Typography>
+        <br />
+        <br />
+        <br />
+        <br />
+      </div>
+      <Grid container spacing={2} alignItems="center">
         <Grid item md={4}>
           <form
             ref={formRef}
@@ -123,7 +152,7 @@ function App() {
           />
         </Grid>
       </Grid>
-      <Typography variant="body2" align="center" style={{ marginTop: "auto" }}>
+      <Typography variant="body2" align="center" style={{ marginTop: "100px" }}>
         This application is not affiliated with WarcraftLogs.
       </Typography>
     </>
