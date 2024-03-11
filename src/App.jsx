@@ -79,7 +79,7 @@ function App() {
           <p>
             This Website is built with{" "}
             <Link
-              href="https://www.curseforge.com/members/numberoneplayerkillerhero/projects"
+              href="https://curseforge.com/wow/addons/warcraftgrouplogs"
               target="_blank"
               rel="noopener noreferrer"
             >
