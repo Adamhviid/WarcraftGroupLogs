@@ -1,0 +1,79 @@
+{
+    "2": {
+        "class": "Druid",
+        "color": "#FF7C0A",
+        "specs": [
+            { "name": "Balance", "role": "dps" },
+            { "name": "Feral", "role": "dps" },
+            { "name": "Guardian", "role": "tank" },
+            { "name": "Restoration", "role": "healer" }
+        ]
+    },
+    "3": {
+        "class": "Hunter",
+        "color": "#AAD372",
+        "specs": [
+            { "name": "Beast Mastery", "role": "dps" },
+            { "name": "Marksmanship", "role": "dps" },
+            { "name": "Survival", "role": "dps" }
+        ]
+    },
+    "4": {
+        "class": "Mage",
+        "color": "#3FC7EB",
+        "specs": [
+            { "name": "Arcane", "role": "dps" },
+            { "name": "Fire", "role": "dps" },
+            { "name": "Frost", "role": "dps" },
+            { "name": "Healer", "role": "healer" }
+        ]
+    },
+    "7": {
+        "class": "Priest",
+        "color": "#FFFFFF",
+        "specs": [
+            { "name": "Shadow", "role": "dps" },
+            { "name": "discipline", "role": "healer" },
+            { "name": "holy", "role": "healer" }
+        ]
+    },
+    "8": {
+        "class": "Rogue",
+        "color": "#FFF468",
+        "specs": [
+            { "name": "Assassination", "role": "dps" },
+            { "name": "Outlaw", "role": "dps" },
+            { "name": "Subtlety", "role": "dps" },
+            { "name": "Tank", "role": "tank" }
+        ]
+    },
+    "9": {
+        "class": "Shaman",
+        "color": "#0070DD",
+        "specs": [
+            { "name": "Elemental", "role": "dps" },
+            { "name": "Enhancement", "role": "dps" },
+            { "name": "Restoration", "role": "healer" },
+            { "name": "Tank", "role": "tank" }
+        ]
+    },
+    "10": {
+        "class": "Warlock",
+        "color": "#8788EE",
+        "specs": [
+            { "name": "Affliction", "role": "dps" },
+            { "name": "Demonology", "role": "dps" },
+            { "name": "Destruction", "role": "dps" },
+            { "name": "Tank", "role": "tank" }
+        ]
+    },
+    "1": {
+        "class": "Warrior",
+        "color": "#C69B6D",
+        "specs": [
+            { "name": "Arms", "role": "dps" },
+            { "name": "Fury", "role": "dps" },
+            { "name": "Protection", "role": "tank" }
+        ]
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "rankColors": [
+        { "limit": 100, "color": "#e5cc80" },
+        { "limit": 99, "color": "#e268a8" },
+        { "limit": 95, "color": "#ff8000" },
+        { "limit": 75, "color": "#a335ee" },
+        { "limit": 50, "color": "#0070ff" },
+        { "limit": 25, "color": "#1eff00" },
+        { "limit": 0, "color": "#666666" }
+    ]
+}
