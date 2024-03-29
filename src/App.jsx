@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 import Filters from "./components/Filters";
 import Search from "./components/Search";
-import ResultCard from "./components/ResultCard/ResultCard";
+import Result from "./components/ResultCard/Result";
 
 function App() {
     const navigate = useNavigate();
@@ -42,9 +42,7 @@ function App() {
 
     const submitForm = () => {
         if (formRef.current) {
-            formRef.current.dispatchEvent(
-                new Event("submit", { cancelable: true })
-            );
+            formRef.current.dispatchEvent(new Event("submit", { cancelable: true }));
         }
     };
 
@@ -79,45 +77,46 @@ function App() {
     return (
         <>
             <div>
-                <Typography variant="h2" component="div" gutterBottom>
+                <Typography
+                    variant="h2"
+                    component="div"
+                    gutterBottom>
                     Warcraft Group Logs
                 </Typography>
-                <Typography variant="p" component="div" gutterBottom>
+                <Typography
+                    variant="p"
+                    component="div"
+                    gutterBottom>
                     <p>
                         This Website is built to be used with{" "}
                         <Link
                             href="https://curseforge.com/wow/addons/warcraftgrouplogs"
                             target="_blank"
-                            rel="noopener noreferrer"
-                        >
+                            rel="noopener noreferrer">
                             {" "}
                             my addon, WarcraftGroupLogs.
                         </Link>{" "}
-                        <p>
-                            The addon automatically generates a link for this
-                            site with region, server, current raid and an array
-                            with all party and raid members.
-                        </p>
+                        <p>The addon automatically generates a link for this site with region, server, current raid and an array with all party and raid members.</p>
                     </p>
-                    <p>
-                        Click on any of the players, to go directly to their
-                        WarcraftLogs profile, to see an indepth analysis of
-                        their performance
-                    </p>
+                    <p>Click on any of the players, to go directly to their WarcraftLogs profile, to see an indepth analysis of their performance</p>
                 </Typography>
                 <br />
                 <br />
                 <br />
                 <br />
             </div>
-            <Grid container spacing={2} alignItems="center">
-                <Grid item md={4}>
+            <Grid
+                container
+                spacing={2}
+                alignItems="center">
+                <Grid
+                    item
+                    md={4}>
                     <form
                         ref={formRef}
                         onSubmit={(e) => {
                             e.preventDefault();
-                        }}
-                    >
+                        }}>
                         <Card
                             sx={{
                                 display: "flex",
@@ -125,8 +124,7 @@ function App() {
                                 alignItems: "center",
                                 justifyContent: "center",
                                 padding: "1em",
-                            }}
-                        >
+                            }}>
                             <Filters
                                 server={server}
                                 setServer={setServer}
@@ -149,9 +147,11 @@ function App() {
                         </Card>
                     </form>
                 </Grid>
-                <Grid item md={8}>
+                <Grid
+                    item
+                    md={8}>
                     {loading && "Loading..."}
-                    <ResultCard
+                    <Result
                         characterData={characterData}
                         server={server}
                         region={region}
@@ -162,8 +162,7 @@ function App() {
             <Typography
                 variant="body2"
                 align="center"
-                style={{ marginTop: "100px" }}
-            >
+                style={{ marginTop: "100px" }}>
                 This application is not affiliated with WarcraftLogs.
             </Typography>
         </>

@@ -2,17 +2,7 @@ import axios from "axios";
 import { Button, TextField, FormControl } from "@mui/material";
 import PropTypes from "prop-types";
 
-function Search({
-    token,
-    setLoading,
-    characters,
-    setCharacters,
-    server,
-    region,
-    zone,
-    setCharacterData,
-    submitForm,
-}) {
+function Search({ token, setLoading, characters, setCharacters, server, region, zone, setCharacterData, submitForm }) {
     const handleCharactersChange = (event) => {
         setCharacters(event.target.value);
     };
@@ -65,7 +55,9 @@ function Search({
 
     return (
         <>
-            <FormControl margin="normal" fullWidth>
+            <FormControl
+                margin="normal"
+                fullWidth>
                 <TextField
                     label="Characters"
                     value={characters}
@@ -79,8 +71,7 @@ function Search({
                 variant="contained"
                 type="submit"
                 onClick={getCharacterData}
-                disabled={!characters || !server || !region || !zone}
-            >
+                disabled={!characters || !server || !region || !zone}>
                 Search
             </Button>
         </>

@@ -9,36 +9,31 @@ const BossLogs = ({ currentLogs, colorBasedOnRank }) => {
                 direction="row"
                 wrap="nowrap"
                 justify="space-between"
-                sx={{ width: "100%" }}
-            >
+                sx={{ width: "100%" }}>
                 {currentLogs.rankings.length === 0 ? (
-                    <Typography variant="body2">
-                        Character have never been logged on WarcraftLogs
-                    </Typography>
+                    <Typography variant="body2">Character have never been logged on WarcraftLogs</Typography>
                 ) : (
                     currentLogs.rankings.map((ranking, i) => (
-                        <Grid item key={i} md={2}>
-                            <Typography variant="body2" component="div">
-                                <Grid container direction="column">
+                        <Grid
+                            item
+                            key={i}
+                            md={2}>
+                            <Typography
+                                variant="body2"
+                                component="div">
+                                <Grid
+                                    container
+                                    direction="column">
                                     <Grid item>
-                                        <Typography variant="body3">
-                                            Boss {i + 1}
-                                        </Typography>
+                                        <Typography variant="body3">Boss {i + 1}</Typography>
                                     </Grid>
                                     <Grid item>
                                         <Typography
                                             variant="body2"
                                             style={{
-                                                color: colorBasedOnRank(
-                                                    ranking.rankPercent
-                                                ),
-                                            }}
-                                        >
-                                            {ranking.rankPercent === null
-                                                ? "N/A"
-                                                : ranking.rankPercent.toFixed(
-                                                      1
-                                                  )}
+                                                color: colorBasedOnRank(ranking.rankPercent),
+                                            }}>
+                                            {ranking.rankPercent === null ? "N/A" : ranking.rankPercent.toFixed(1)}
                                         </Typography>
                                     </Grid>
                                 </Grid>
