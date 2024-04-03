@@ -6,23 +6,30 @@ import BossLogs from "./BossLogs";
 
 import Classes from "../../data/classes.json";
 import WclColors from "../../data/wclColors.json";
+import DpsIcon from "../../icons/dps.png";
+import HealerIcon from "../../icons/healer.png";
+import TankIcon from "../../icons/tank.png";
 
-const LogCard = (data, key) => {
+const ResultCard = (data, index) => {
     const [currentLogs, setCurrentLogs] = useState();
     const [rolesWithLogs, setRolesWithLogs] = useState([]);
-    const [name, setName] = useState(data.data.name);
-    const [classID, setClassID] = useState(data.data.result.classID);
-    const [results, setResults] = useState(data.data.result);
+    const name = data.data.name;
+    const classID = data.data.result.classID;
+    const results = data.data.result;
 
     useEffect(() => {
-        const roles = ["dps", "healer", "tank"];
+        const roles = [
+            { label: "dps", icon: DpsIcon },
+            { label: "healer", icon: HealerIcon },
+            { label: "tank", icon: TankIcon },
+        ];
         let highestBestPerformanceAverage = 0;
         let newRoles = [];
 
         roles.forEach((role) => {
-            const roleRankings = results[`${role}Rankings`];
+            const roleRankings = results[`${role.label}Rankings`];
 
-            if (roleRankings.bestPerformanceAverage != null) {
+            if (roleRankings && roleRankings.bestPerformanceAverage != null) {
                 newRoles.push(role);
 
                 if (roleRankings.bestPerformanceAverage > highestBestPerformanceAverage) {
@@ -31,9 +38,9 @@ const LogCard = (data, key) => {
                 }
             }
         });
-
+        console.log(currentLogs)
         setRolesWithLogs(newRoles);
-    }, [data]);
+    }, [data, results]);
 
     function colorBasedOnRank(number) {
         const { color } = WclColors["rankColors"].find(({ limit }) => number >= limit);
@@ -44,12 +51,17 @@ const LogCard = (data, key) => {
         setCurrentLogs(results[`${role}Rankings`]);
     }
 
+    function ifNoLogs() {
+        if (results.dpsRankings.rankings.length === 0 && results.healerRankings.rankings.length === 0 && results.tankRankings.rankings.length === 0) {
+            true;
+        } else {
+            false;
+        }
+    }
+
     return (
-        <Grid
-            item
-            key={key}
-            md={6}>
-            <Card key={key}>
+        <Card key={index}>
+            {ifNoLogs ? (
                 <CardContent>
                     <div
                         style={{
@@ -70,12 +82,18 @@ const LogCard = (data, key) => {
                             {rolesWithLogs.map((role, index) => (
                                 <button
                                     key={index}
-                                    onClick={() => handleRoleButton(role)}>
-                                    {role}
+                                    onClick={() => handleRoleButton(role.label)}
+                                    style={{
+                                        backgroundColor: currentLogs === results[`${role.label}Rankings`] ? "blue" : "black",
+                                    }}>
+                                    <img
+                                        src={role.icon}
+                                        alt={role.label}
+                                    />
                                 </button>
                             ))}
                         </div>
-                        {/* <Typography
+                        <Typography
                             variant="p"
                             style={{
                                 color: colorBasedOnRank(
@@ -106,7 +124,7 @@ const LogCard = (data, key) => {
                                   results.dpsRankings.medianPerformanceAverage.toFixed(
                                       1
                                   )}
-                        </Typography> */}
+                        </Typography>
                     </div>
 
                     {currentLogs ? (
@@ -116,14 +134,16 @@ const LogCard = (data, key) => {
                         />
                     ) : null}
                 </CardContent>
-            </Card>
-        </Grid>
+            ) : (
+                <>hej</>
+            )}
+        </Card>
     );
 };
 
-LogCard.propTypes = {
+ResultCard.propTypes = {
     data: PropTypes.object,
     index: PropTypes.number,
 };
 
-export default LogCard;
+export default ResultCard;

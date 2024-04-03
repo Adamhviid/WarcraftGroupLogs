@@ -1,19 +1,7 @@
-/* import { useState, useEffect } from "react"; */
 import PropTypes from "prop-types";
-import {
-    /*  Card,
-    CardContent,
-    Typography, */
-    Grid,
-    /* CardActionArea, */
-} from "@mui/material";
+import { Grid } from "@mui/material";
 
-/* import BossLogs from "./BossLogs";
-
-import Classes from "../../data/classes.json";
-import WclColors from "../../data/wclColors.json"; */
-
-import LogCard from "./LogCard";
+import ResultCard from "./ResultCard";
 
 function Result({ characterData /* server, region, zone  */ }) {
     /* const groupBestPerformanceAverage =
@@ -22,38 +10,28 @@ function Result({ characterData /* server, region, zone  */ }) {
             0
         ) / characterData.length; */
 
-    /* const getMultipleRankings = () => {
-        characterData.forEach((data) => {
-            ["dpsRankings", "healerRankings", "tankRankings"].forEach(
-                (ranking) => {
-                    console.log(
-                        ranking +
-                            " = " +
-                            data.result[ranking].bestPerformanceAverage
-                    );
-                }
-            );
-        });
-    };
-
-    getMultipleRankings(); */
-
     return (
         <>
-            {characterData && (
+            {characterData ? (
                 <div>
                     <Grid
                         container
                         spacing={2}>
                         {characterData.map((data, index) => (
-                            <LogCard
-                                data={data}
-                                key={index}
-                            />
+                            <Grid
+                                item
+                                xs={3}
+                                key={index}>
+                                <ResultCard
+                                    key={index}
+                                    data={data}
+                                    index={index}
+                                />
+                            </Grid>
                         ))}
                     </Grid>
                 </div>
-            )}
+            ) : null}
         </>
     );
 }

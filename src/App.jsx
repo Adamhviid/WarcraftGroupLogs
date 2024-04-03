@@ -101,9 +101,6 @@ function App() {
                     <p>Click on any of the players, to go directly to their WarcraftLogs profile, to see an indepth analysis of their performance</p>
                 </Typography>
                 <br />
-                <br />
-                <br />
-                <br />
             </div>
             <Grid
                 container
@@ -111,7 +108,18 @@ function App() {
                 alignItems="center">
                 <Grid
                     item
-                    md={4}>
+                    md={12}>
+                    {loading && "Loading..."}
+                    <Result
+                        characterData={characterData}
+                        server={server}
+                        region={region}
+                        zone={zone}
+                    />
+                </Grid>
+                <Grid
+                    item
+                    md={12}>
                     <form
                         ref={formRef}
                         onSubmit={(e) => {
@@ -146,17 +154,6 @@ function App() {
                             />
                         </Card>
                     </form>
-                </Grid>
-                <Grid
-                    item
-                    md={8}>
-                    {loading && "Loading..."}
-                    <Result
-                        characterData={characterData}
-                        server={server}
-                        region={region}
-                        zone={zone}
-                    />
                 </Grid>
             </Grid>
             <Typography
