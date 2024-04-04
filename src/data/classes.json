@@ -75,5 +75,14 @@
             { "name": "Fury", "role": "dps" },
             { "name": "Protection", "role": "tank" }
         ]
+    },
+    "11": {
+        "class": "Warrior",
+        "color": "#C69B6D",
+        "specs": [
+            { "name": "Arms", "role": "dps" },
+            { "name": "Fury", "role": "dps" },
+            { "name": "Protection", "role": "tank" }
+        ]
     }
 }

@@ -39,7 +39,17 @@ function Search({ token, setLoading, characters, setCharacters, server, region, 
                     ? result.data.data.characterData.character
                     : {
                           classID: 1,
-                          zoneRankings: {
+                          healerRankings: {
+                              bestPerformanceAverage: null,
+                              medianPerformanceAverage: null,
+                              rankings: [],
+                          },
+                          tankRankings: {
+                              bestPerformanceAverage: null,
+                              medianPerformanceAverage: null,
+                              rankings: [],
+                          },
+                          dpsRankings: {
                               bestPerformanceAverage: null,
                               medianPerformanceAverage: null,
                               rankings: [],
@@ -48,6 +58,7 @@ function Search({ token, setLoading, characters, setCharacters, server, region, 
             };
         });
         const results = await Promise.all(promises);
+        console.log(results);
         setCharacterData(results);
         setLoading(false);
         submitForm();

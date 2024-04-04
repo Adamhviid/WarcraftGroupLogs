@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { Card, CardContent, Typography, Grid } from "@mui/material";
+import { Card, CardContent, Typography } from "@mui/material";
 
 import BossLogs from "./BossLogs";
 
@@ -38,13 +38,15 @@ const ResultCard = (data, index) => {
                 }
             }
         });
-        console.log(currentLogs)
         setRolesWithLogs(newRoles);
     }, [data, results]);
 
     function colorBasedOnRank(number) {
-        const { color } = WclColors["rankColors"].find(({ limit }) => number >= limit);
-        return color;
+        if (number === null) {
+            return "black";
+        }
+        const rankColorObj = WclColors["rankColors"].find(({ limit }) => number >= limit);
+        return rankColorObj ? rankColorObj.color : "black";
     }
 
     function handleRoleButton(role) {
@@ -96,34 +98,16 @@ const ResultCard = (data, index) => {
                         <Typography
                             variant="p"
                             style={{
-                                color: colorBasedOnRank(
-                                    results.dpsRankings
-                                        .bestPerformanceAverage
-                                ),
+                                color: colorBasedOnRank(results.dpsRankings.bestPerformanceAverage),
                             }}>
-                            {results.dpsRankings
-                                .bestPerformanceAverage === null
-                                ? null
-                                : "Average: " +
-                                  results.dpsRankings.bestPerformanceAverage.toFixed(
-                                      1
-                                  )}
+                            {results.dpsRankings.bestPerformanceAverage === null ? null : "Average: " + results.dpsRankings.bestPerformanceAverage.toFixed(1)}
                         </Typography>
                         <Typography
                             variant="p"
                             style={{
-                                color: colorBasedOnRank(
-                                    results.dpsRankings
-                                        .medianPerformanceAverage
-                                ),
+                                color: colorBasedOnRank(results.dpsRankings.medianPerformanceAverage),
                             }}>
-                            {results.dpsRankings
-                                .medianPerformanceAverage === null
-                                ? null
-                                : "Median: " +
-                                  results.dpsRankings.medianPerformanceAverage.toFixed(
-                                      1
-                                  )}
+                            {results.dpsRankings.medianPerformanceAverage === null ? null : "Median: " + results.dpsRankings.medianPerformanceAverage.toFixed(1)}
                         </Typography>
                     </div>
 
