@@ -95,20 +95,20 @@ const ResultCard = (data, index) => {
                                 </button>
                             ))}
                         </div>
-                        <Typography
+                        {/* <Typography
                             variant="p"
                             style={{
                                 color: colorBasedOnRank(results.dpsRankings.bestPerformanceAverage),
                             }}>
-                            {results.dpsRankings.bestPerformanceAverage === null ? null : "Average: " + results.dpsRankings.bestPerformanceAverage.toFixed(1)}
+                            {results.dpsRankings.bestPerformanceAverage === null ? null : "Average: " + (results.dpsRankings.bestPerformanceAverage || 0).toFixed(1)}
                         </Typography>
                         <Typography
                             variant="p"
                             style={{
                                 color: colorBasedOnRank(results.dpsRankings.medianPerformanceAverage),
                             }}>
-                            {results.dpsRankings.medianPerformanceAverage === null ? null : "Median: " + results.dpsRankings.medianPerformanceAverage.toFixed(1)}
-                        </Typography>
+                            {results.dpsRankings.medianPerformanceAverage === null ? null : "Median: " + (results.dpsRankings.medianPerformanceAverage || 0).toFixed(1)}
+                        </Typography> */}
                     </div>
 
                     {currentLogs ? (
