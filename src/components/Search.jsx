@@ -9,7 +9,9 @@ function Search({ token, setLoading, characters, setCharacters, server, region, 
         setCharacters(event.target.value);
     };
 
-    async function getCharacterData() {
+    async function getCharacterData(event) {
+        event.preventDefault();
+        console.log("Getting character data1");
         setLoading(true);
         setCharacterData(null);
         const charsArray = characters.split(",").map((name) => name.trim());
@@ -23,15 +25,15 @@ function Search({ token, setLoading, characters, setCharacters, server, region, 
                 },
                 data: {
                     query: `query {
-                              characterData {
-                                character(name: "${name}", serverSlug: "${server}", serverRegion: "${region}") {
-                                  classID
-                                  healerRankings: zoneRankings(zoneID: ${zone}, role: Healer, metric: hps)
-                                  tankRankings: zoneRankings(zoneID: ${zone}, role: Tank, metric: dps)
-                                  dpsRankings: zoneRankings(zoneID: ${zone}, role: DPS, metric: dps)
-                                }
-                              }
-                            }`,
+                        characterData {
+                            character(name: "${name}", serverSlug: "${server}", serverRegion: "${region}") {
+                                classID
+                                healerRankings: zoneRankings(zoneID: ${zone}, role: Healer, metric: hps)
+                                tankRankings: zoneRankings(zoneID: ${zone}, role: Tank, metric: dps)
+                                dpsRankings: zoneRankings(zoneID: ${zone}, role: DPS, metric: dps)
+                            }
+                        }
+                    }`,
                 },
             });
 
@@ -59,11 +61,12 @@ function Search({ token, setLoading, characters, setCharacters, server, region, 
                       },
             };
         });
+        console.log("Getting character data2");
         const results = await Promise.all(promises);
-
+        console.log("Getting character data3");
         setCharacterData(results);
         setLoading(false);
-        submitForm();
+        submitForm(event);
     }
 
     return (
@@ -82,18 +85,18 @@ function Search({ token, setLoading, characters, setCharacters, server, region, 
 
             <Button
                 variant="contained"
-                type="submit"
-                onClick={getCharacterData}
-                disabled={!characters || !server || !region || !zone}>
+                onClick={(event) => getCharacterData(event)}
+                disabled={!characters || !server || !region || !zone}
+                type="button">
                 Search
             </Button>
 
-            {/* <Button
+            <Button
                 variant="contained"
                 type="button"
                 onClick={() => setCharacterData(exampleRaid)}>
                 Use Example Raid
-            </Button> */}
+            </Button>
         </>
     );
 }

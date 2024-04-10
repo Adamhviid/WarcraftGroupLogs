@@ -40,7 +40,8 @@ function App() {
         navigate(`?${params}`);
     }, [server, region, zone, characters, navigate]);
 
-    const submitForm = () => {
+    const submitForm = (event) => {
+        event.preventDefault();
         if (formRef.current) {
             formRef.current.dispatchEvent(new Event("submit", { cancelable: true }));
         }
@@ -149,7 +150,7 @@ function App() {
                                 region={region}
                                 zone={zone}
                                 setCharacterData={setCharacterData}
-                                submitForm={submitForm}
+                                submitForm={(event) => submitForm(event)}
                             />
                         </Card>
                     </form>
