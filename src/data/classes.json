@@ -1,4 +1,13 @@
 {
+    "1": {
+        "class": "Warrior",
+        "color": "#C69B6D",
+        "specs": [
+            { "name": "Arms", "role": "dps" },
+            { "name": "Fury", "role": "dps" },
+            { "name": "Protection", "role": "tank" }
+        ]
+    },
     "2": {
         "class": "Druid",
         "color": "#FF7C0A",
@@ -26,6 +35,15 @@
             { "name": "Fire", "role": "dps" },
             { "name": "Frost", "role": "dps" },
             { "name": "Healer", "role": "healer" }
+        ]
+    },
+    "6": {
+        "class": "Paladin",
+        "color": "#F48CBA",
+        "specs": [
+            { "name": "Holy", "role": "healer" },
+            { "name": "Protection", "role": "tank" },
+            { "name": "Retribution", "role": "dps" }
         ]
     },
     "7": {
@@ -65,15 +83,6 @@
             { "name": "Demonology", "role": "dps" },
             { "name": "Destruction", "role": "dps" },
             { "name": "Tank", "role": "tank" }
-        ]
-    },
-    "1": {
-        "class": "Warrior",
-        "color": "#C69B6D",
-        "specs": [
-            { "name": "Arms", "role": "dps" },
-            { "name": "Fury", "role": "dps" },
-            { "name": "Protection", "role": "tank" }
         ]
     },
     "11": {

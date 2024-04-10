@@ -87,18 +87,16 @@ function App() {
                     variant="p"
                     component="div"
                     gutterBottom>
-                    <p>
-                        This Website is built to be used with{" "}
-                        <Link
-                            href="https://curseforge.com/wow/addons/warcraftgrouplogs"
-                            target="_blank"
-                            rel="noopener noreferrer">
-                            {" "}
-                            my addon, WarcraftGroupLogs.
-                        </Link>{" "}
-                        <p>The addon automatically generates a link for this site with region, server, current raid and an array with all party and raid members.</p>
-                    </p>
-                    <p>Click on any of the players, to go directly to their WarcraftLogs profile, to see an indepth analysis of their performance</p>
+                    This Website is built to be used with{" "}
+                    <Link
+                        href="https://curseforge.com/wow/addons/warcraftgrouplogs"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                        {" "}
+                        my addon, WarcraftGroupLogs.
+                    </Link>{" "}
+                    <p>The addon automatically generates a link for this site with region, server, current raid and an array with all party and raid members.</p>
+                    <p>Click on any of the players names, to go directly to their WarcraftLogs profile, to see an indepth analysis of their performance</p>
                 </Typography>
                 <br />
             </div>
@@ -132,6 +130,7 @@ function App() {
                                 alignItems: "center",
                                 justifyContent: "center",
                                 padding: "1em",
+                                /* background: "#3f3f3f", */
                             }}>
                             <Filters
                                 server={server}
@@ -156,12 +155,12 @@ function App() {
                     </form>
                 </Grid>
             </Grid>
-            <Typography
+            {/* <Typography
                 variant="body2"
                 align="center"
                 style={{ marginTop: "100px" }}>
                 This application is not affiliated with WarcraftLogs.
-            </Typography>
+            </Typography> */}
         </>
     );
 }

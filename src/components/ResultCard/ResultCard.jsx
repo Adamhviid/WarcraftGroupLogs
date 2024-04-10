@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { Card, CardContent, Typography } from "@mui/material";
+import { Card, CardContent, Typography, Divider } from "@mui/material";
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 
 import BossLogs from "./BossLogs";
 
@@ -10,12 +11,10 @@ import DpsIcon from "../../icons/dps.png";
 import HealerIcon from "../../icons/healer.png";
 import TankIcon from "../../icons/tank.png";
 
-const ResultCard = (data, index) => {
+const ResultCard = ({ data, index, server, region, zone }) => {
     const [currentLogs, setCurrentLogs] = useState();
     const [rolesWithLogs, setRolesWithLogs] = useState([]);
-    const name = data.data.name;
-    const classID = data.data.result.classID;
-    const results = data.data.result;
+    const results = data.result;
 
     useEffect(() => {
         const roles = [
@@ -39,7 +38,7 @@ const ResultCard = (data, index) => {
             }
         });
         setRolesWithLogs(newRoles);
-    }, [data, results]);
+    }, [results]);
 
     function colorBasedOnRank(number) {
         if (number === null) {
@@ -54,16 +53,16 @@ const ResultCard = (data, index) => {
     }
 
     function ifNoLogs() {
-        if (results.dpsRankings.rankings.length === 0 && results.healerRankings.rankings.length === 0 && results.tankRankings.rankings.length === 0) {
-            true;
-        } else {
-            false;
-        }
+        return !(currentLogs.rankings.length === 0 && results.healerRankings.rankings.length === 0 && results.tankRankings.rankings.length === 0);
     }
 
     return (
-        <Card key={index}>
-            {ifNoLogs ? (
+        <Card
+            key={index}
+            sx={{ background: "#3f3f3f" }}>
+            {!ifNoLogs ? (
+                <></>
+            ) : (
                 <CardContent>
                     <div
                         style={{
@@ -76,39 +75,44 @@ const ResultCard = (data, index) => {
                             component="div"
                             style={{
                                 fontWeight: "bold",
-                                color: Classes[classID].color,
+                                color: Classes[data.result.classID].color,
                             }}>
-                            {name}
+                            <a
+                                href={`https://sod.warcraftlogs.com/character/${region}/${server}/${data.name}#zone=${zone}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{ color: "inherit", textDecoration: "none" }}>
+                                {data.name}
+                            </a>
+                            <Divider />
+                            <Typography
+                                style={{
+                                    color: currentLogs ? colorBasedOnRank(currentLogs.bestPerformanceAverage) : "black",
+                                }}>
+                                {currentLogs ? "Average: " + currentLogs.bestPerformanceAverage.toFixed(0) : null}
+                            </Typography>
+                            <Typography
+                                style={{
+                                    color: currentLogs ? colorBasedOnRank(currentLogs.medianPerformanceAverage) : "black",
+                                }}>
+                                {currentLogs ? "Median: " + currentLogs.medianPerformanceAverage.toFixed(0) : null}
+                            </Typography>
                         </Typography>
-                        <div>
+
+                        <div style={{ display: "flex", flexDirection: "column" }}>
                             {rolesWithLogs.map((role, index) => (
-                                <button
+                                <a
                                     key={index}
                                     onClick={() => handleRoleButton(role.label)}
-                                    style={{
-                                        backgroundColor: currentLogs === results[`${role.label}Rankings`] ? "blue" : "black",
-                                    }}>
+                                    style={{ backgroundColor: "transparent", cursor: "pointer" }}>
+                                    <ArrowRightIcon sx={{ color: currentLogs === results[`${role.label}Rankings`] ? "black" : "#3f3f3f" }} />
                                     <img
                                         src={role.icon}
                                         alt={role.label}
                                     />
-                                </button>
+                                </a>
                             ))}
                         </div>
-                        {/* <Typography
-                            variant="p"
-                            style={{
-                                color: colorBasedOnRank(results.dpsRankings.bestPerformanceAverage),
-                            }}>
-                            {results.dpsRankings.bestPerformanceAverage === null ? null : "Average: " + (results.dpsRankings.bestPerformanceAverage || 0).toFixed(1)}
-                        </Typography>
-                        <Typography
-                            variant="p"
-                            style={{
-                                color: colorBasedOnRank(results.dpsRankings.medianPerformanceAverage),
-                            }}>
-                            {results.dpsRankings.medianPerformanceAverage === null ? null : "Median: " + (results.dpsRankings.medianPerformanceAverage || 0).toFixed(1)}
-                        </Typography> */}
                     </div>
 
                     {currentLogs ? (
@@ -116,10 +120,10 @@ const ResultCard = (data, index) => {
                             currentLogs={currentLogs}
                             colorBasedOnRank={colorBasedOnRank}
                         />
-                    ) : null}
+                    ) : (
+                        <Typography>{data.result.classID === 1 ? "Character have never been logged" : "No logs found for current raid"}</Typography>
+                    )}
                 </CardContent>
-            ) : (
-                <>hej</>
             )}
         </Card>
     );
@@ -128,6 +132,9 @@ const ResultCard = (data, index) => {
 ResultCard.propTypes = {
     data: PropTypes.object,
     index: PropTypes.number,
+    server: PropTypes.string,
+    region: PropTypes.string,
+    zone: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export default ResultCard;
