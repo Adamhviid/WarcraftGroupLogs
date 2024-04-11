@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import axios from "axios";
 import { Card, Grid, Typography, Link } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -8,19 +7,6 @@ import Search from "./components/Search";
 import Result from "./components/ResultCard/Result";
 
 function App() {
-    const navigate = useNavigate();
-    const location = useLocation();
-
-    useEffect(() => {
-        getAccessToken();
-        const queryParams = new URLSearchParams(location.search);
-        setServer(queryParams.get("server") || "");
-        setRegion(queryParams.get("region") || "");
-        setZone(queryParams.get("zone") || "");
-        setCharacters(queryParams.get("characters") || "");
-    }, []);
-
-    const [token, setToken] = useState(null);
     const [loading, setLoading] = useState(false);
     const formRef = useRef();
 
@@ -29,6 +15,17 @@ function App() {
     const [zone, setZone] = useState("");
     const [characters, setCharacters] = useState("");
     const [characterData, setCharacterData] = useState(null);
+
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    useEffect(() => {
+        const queryParams = new URLSearchParams(location.search);
+        setServer(queryParams.get("server") || "");
+        setRegion(queryParams.get("region") || "");
+        setZone(queryParams.get("zone") || "");
+        setCharacters(queryParams.get("characters") || "");
+    }, []);
 
     useEffect(() => {
         const params = new URLSearchParams({
@@ -46,34 +43,6 @@ function App() {
             formRef.current.dispatchEvent(new Event("submit", { cancelable: true }));
         }
     };
-
-    async function getAccessToken() {
-        const auth = {
-            username: import.meta.env.VITE_CLIENT_ID,
-            password: import.meta.env.VITE_CLIENT_SECRET,
-        };
-
-        const params = new URLSearchParams({
-            grant_type: "client_credentials",
-        });
-
-        const config = {
-            method: "post",
-            url: "https://sod.warcraftlogs.com/oauth/token",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            auth: auth,
-            data: params,
-        };
-
-        try {
-            const response = await axios(config);
-            setToken(response.data.access_token);
-        } catch (error) {
-            console.error(error);
-        }
-    }
 
     return (
         <>
@@ -96,8 +65,14 @@ function App() {
                         {" "}
                         my addon, WarcraftGroupLogs.
                     </Link>{" "}
-                    <p>The addon automatically generates a link for this site with region, server, current raid and an array with all party and raid members.</p>
-                    <p>Click on any of the players names, to go directly to their WarcraftLogs profile, to see an indepth analysis of their performance</p>
+                    <p>
+                        The addon automatically generates a link for this site with region, server, current raid and an array with all party and raid
+                        members.
+                    </p>
+                    <p>
+                        Click on any of the players names, to go directly to their WarcraftLogs profile, to see an indepth analysis of their
+                        performance
+                    </p>
                 </Typography>
                 <br />
             </div>
@@ -142,7 +117,6 @@ function App() {
                                 setZone={setZone}
                             />
                             <Search
-                                token={token}
                                 setLoading={setLoading}
                                 characters={characters}
                                 setCharacters={setCharacters}
@@ -156,12 +130,6 @@ function App() {
                     </form>
                 </Grid>
             </Grid>
-            {/* <Typography
-                variant="body2"
-                align="center"
-                style={{ marginTop: "100px" }}>
-                This application is not affiliated with WarcraftLogs.
-            </Typography> */}
         </>
     );
 }

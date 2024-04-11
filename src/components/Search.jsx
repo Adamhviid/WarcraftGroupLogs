@@ -2,71 +2,39 @@ import axios from "axios";
 import { Button, TextField, FormControl } from "@mui/material";
 import PropTypes from "prop-types";
 
-import exampleRaid from "../data/exampleRaid.json";
+/* import exampleRaid from "../data/exampleRaid.json"; */
 
-function Search({ token, setLoading, characters, setCharacters, server, region, zone, setCharacterData, submitForm }) {
+function Search({ setLoading, characters, setCharacters, server, region, zone, setCharacterData }) {
     const handleCharactersChange = (event) => {
         setCharacters(event.target.value);
     };
 
     async function getCharacterData(event) {
         event.preventDefault();
-        console.log("Getting character data1");
+
         setLoading(true);
         setCharacterData(null);
         const charsArray = characters.split(",").map((name) => name.trim());
 
         const promises = charsArray.map(async (name) => {
             const result = await axios({
-                url: "https://sod.warcraftlogs.com/api/v2/client",
+                url: `${import.meta.env.VITE_BACKEND_URL}/get_character_data`,
                 method: "POST",
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
                 data: {
-                    query: `query {
-                        characterData {
-                            character(name: "${name}", serverSlug: "${server}", serverRegion: "${region}") {
-                                classID
-                                healerRankings: zoneRankings(zoneID: ${zone}, role: Healer, metric: hps)
-                                tankRankings: zoneRankings(zoneID: ${zone}, role: Tank, metric: dps)
-                                dpsRankings: zoneRankings(zoneID: ${zone}, role: DPS, metric: dps)
-                            }
-                        }
-                    }`,
+                    name,
+                    server,
+                    region,
+                    zone,
+                },
+                headers: {
+                    "Content-Type": "application/json",
                 },
             });
-
-            return {
-                name,
-                result: result.data.data.characterData.character
-                    ? result.data.data.characterData.character
-                    : {
-                          classID: 1,
-                          healerRankings: {
-                              bestPerformanceAverage: null,
-                              medianPerformanceAverage: null,
-                              rankings: [],
-                          },
-                          tankRankings: {
-                              bestPerformanceAverage: null,
-                              medianPerformanceAverage: null,
-                              rankings: [],
-                          },
-                          dpsRankings: {
-                              bestPerformanceAverage: null,
-                              medianPerformanceAverage: null,
-                              rankings: [],
-                          },
-                      },
-            };
+            return result.data;
         });
-        console.log("Getting character data2");
         const results = await Promise.all(promises);
-        console.log("Getting character data3");
         setCharacterData(results);
         setLoading(false);
-        submitForm(event);
     }
 
     return (
@@ -79,7 +47,11 @@ function Search({ token, setLoading, characters, setCharacters, server, region, 
                     value={characters}
                     variant="outlined"
                     onChange={handleCharactersChange}
-                    inputProps={{ style: { textAlign: "center" } }}
+                    inputProps={{
+                        style: {
+                            textAlign: "center",
+                        },
+                    }}
                 />
             </FormControl>
 
@@ -91,18 +63,17 @@ function Search({ token, setLoading, characters, setCharacters, server, region, 
                 Search
             </Button>
 
-            <Button
+            {/* <Button
                 variant="contained"
                 type="button"
                 onClick={() => setCharacterData(exampleRaid)}>
                 Use Example Raid
-            </Button>
+            </Button> */}
         </>
     );
 }
 
 Search.propTypes = {
-    token: PropTypes.string,
     setLoading: PropTypes.func.isRequired,
     characters: PropTypes.string.isRequired,
     setCharacters: PropTypes.func.isRequired,
