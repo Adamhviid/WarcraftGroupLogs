@@ -59,12 +59,11 @@ function Search({ setLoading, characters, setCharacters, server, region, zone, s
                     }}
                 />
             </FormControl>
-
             <Button
                 variant="contained"
                 onClick={(event) => getCharacterData(event)}
                 disabled={!characters || !server || !region || !zone}
-                type="button">
+                type="submit">
                 Search
             </Button>
 
