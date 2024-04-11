@@ -6,33 +6,37 @@ import ResultCard from "./ResultCard";
 import WclColors from "../../data/wclColors.json";
 
 function Result({ characterData, server, region, zone }) {
-    const [groupBestPerformanceAverage, setGroupBestPerformanceAverage] = useState(null);
+    /* const [groupBestPerformanceAverage, setGroupBestPerformanceAverage] = useState(null); */
 
     useEffect(() => {
         if (!characterData) return;
-        setGroupBestPerformanceAverage(characterData.reduce((sum, data) => sum + data.result.dpsRankings.bestPerformanceAverage, 0) / characterData.length);
-    }, [characterData]);
 
-    function colorBasedOnRank(number) {
+        //TODO: make it work for the highest ranking, not only dpsranking
+        /* setGroupBestPerformanceAverage(
+            characterData.reduce((sum, data) => sum + data[zone].result.dpsRankings.bestPerformanceAverage, 0) / characterData.length
+        ); */
+    }, [characterData, server, region]);
+
+    /* function colorBasedOnRank(number) {
         if (number === null) {
-            return "black";
         }
+        return "black";
         const rankColorObj = WclColors["rankColors"].find(({ limit }) => number >= limit);
         return rankColorObj ? rankColorObj.color : "black";
-    }
+    } */
 
     return (
         <>
             {characterData ? (
                 <div>
+                    {/* <Typography
                     <span>Whole Raid Best Performance Average: </span>
-                    <Typography
                         variant="body"
                         style={{
                             color: colorBasedOnRank(groupBestPerformanceAverage),
                         }}>
                         {groupBestPerformanceAverage === null ? "N/A" : groupBestPerformanceAverage.toFixed(0)}
-                    </Typography>
+                    </Typography> */}
                     <Grid
                         container
                         spacing={2}>
@@ -41,14 +45,16 @@ function Result({ characterData, server, region, zone }) {
                                 item
                                 xs={3}
                                 key={index}>
-                                <ResultCard
-                                    key={index}
-                                    data={data}
-                                    index={index}
-                                    server={server}
-                                    region={region}
-                                    zone={zone}
-                                />
+                                {data[zone] != null ? (
+                                    <ResultCard
+                                        key={index}
+                                        data={data}
+                                        index={index}
+                                        server={server}
+                                        region={region}
+                                        zone={zone}
+                                    />
+                                ) : null}
                             </Grid>
                         ))}
                     </Grid>

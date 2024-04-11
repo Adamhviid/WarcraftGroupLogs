@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import axios from "axios";
 import { Button, TextField, FormControl } from "@mui/material";
 import PropTypes from "prop-types";
@@ -5,6 +6,10 @@ import PropTypes from "prop-types";
 /* import exampleRaid from "../data/exampleRaid.json"; */
 
 function Search({ setLoading, characters, setCharacters, server, region, zone, setCharacterData }) {
+    useEffect(() => {
+        setCharacterData([]);
+    }, [server, region, zone]);
+
     const handleCharactersChange = (event) => {
         setCharacters(event.target.value);
     };

@@ -14,7 +14,7 @@ import TankIcon from "../../icons/tank.png";
 const ResultCard = ({ data, index, server, region, zone }) => {
     const [currentLogs, setCurrentLogs] = useState();
     const [rolesWithLogs, setRolesWithLogs] = useState([]);
-    const results = data.result;
+    const results = data[zone].result;
 
     useEffect(() => {
         const roles = [
@@ -75,7 +75,7 @@ const ResultCard = ({ data, index, server, region, zone }) => {
                             component="div"
                             style={{
                                 fontWeight: "bold",
-                                color: Classes[data.result.classID].color,
+                                color: Classes[results.classID].color,
                             }}>
                             <a
                                 href={`https://sod.warcraftlogs.com/character/${region}/${server}/${data.name}#zone=${zone}`}
@@ -121,7 +121,9 @@ const ResultCard = ({ data, index, server, region, zone }) => {
                             colorBasedOnRank={colorBasedOnRank}
                         />
                     ) : (
-                        <Typography>{data.result.classID === 1 ? "Character have never been logged" : "No logs found for current raid"}</Typography>
+                        <Typography>
+                            {data.zone && results.classID === 1 ? "Character have never been logged" : "No logs found for current raid"}
+                        </Typography>
                     )}
                 </CardContent>
             )}
