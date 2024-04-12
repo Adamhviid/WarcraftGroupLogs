@@ -23,7 +23,7 @@ function Search({ setLoading, characters, setCharacters, server, region, zone, s
 
         const promises = charsArray.map(async (name) => {
             const result = await axios({
-                url: `${import.meta.env.VITE_BACKEND_URL}/get_character_data`,
+                url: `${import.meta.env.VITE_BACKEND_URL}/sod/get_character_data`,
                 method: "POST",
                 data: {
                     name,

@@ -75,7 +75,7 @@ const ResultCard = ({ data, index, server, region, zone }) => {
                             component="div"
                             style={{
                                 fontWeight: "bold",
-                                color: Classes[results.classID].color,
+                                color: Classes[results.classID] ? Classes[results.classID].color : "defaultColor",
                             }}>
                             <a
                                 href={`https://sod.warcraftlogs.com/character/${region}/${server}/${data.name}#zone=${zone}`}
