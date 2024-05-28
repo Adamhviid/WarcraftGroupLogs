@@ -14,9 +14,9 @@ import {
     TextField,
 } from "@mui/material";
 
-import sod_image from "../assets/sod.png";
-import retail_image from "../assets/retail.png";
-import cata_image from "../assets/cata.png";
+import sod_image from "../assets/versions/sod.webp";
+import retail_image from "../assets/versions/retail.webp";
+import cata_image from "../assets/versions/cata.webp";
 
 import sod_servers from "../data/servers/sod.json";
 import retail_eu_servers from "../data/servers/retail_eu.json";

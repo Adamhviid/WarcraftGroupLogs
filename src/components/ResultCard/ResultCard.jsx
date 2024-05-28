@@ -7,9 +7,9 @@ import BossLogs from "./BossLogs";
 
 import Classes from "../../data/classes.json";
 import WclColors from "../../data/wclColors.json";
-import DpsIcon from "../../icons/dps.png";
-import HealerIcon from "../../icons/healer.png";
-import TankIcon from "../../icons/tank.png";
+import DpsIcon from "../../assets/icons/dps.png";
+import HealerIcon from "../../assets/icons/healer.png";
+import TankIcon from "../../assets/icons/tank.png";
 
 const ResultCard = ({ data, index, version, server, region, zone }) => {
     const [currentLogs, setCurrentLogs] = useState();

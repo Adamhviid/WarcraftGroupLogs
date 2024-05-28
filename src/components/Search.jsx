@@ -3,8 +3,6 @@ import axios from "axios";
 import { Button, TextField, FormControl } from "@mui/material";
 import PropTypes from "prop-types";
 
-/* import exampleRaid from "../data/exampleRaid.json"; */
-
 function Search({ setLoading, characters, setCharacters, version, server, region, zone, setCharacterData }) {
     const [error, setError] = useState(null);
 
@@ -81,13 +79,6 @@ function Search({ setLoading, characters, setCharacters, version, server, region
                 type="submit">
                 Search
             </Button>
-
-            {/* <Button
-                variant="contained"
-                type="button"
-                onClick={() => setCharacterData(exampleRaid)}>
-                Use Example Raid
-            </Button> */}
         </>
     );
 }
