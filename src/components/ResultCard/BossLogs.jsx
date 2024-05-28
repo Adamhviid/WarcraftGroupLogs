@@ -4,7 +4,6 @@ import { Typography, Grid } from "@mui/material";
 const BossLogs = ({ currentLogs, colorBasedOnRank }) => {
     return (
         <div>
-            Boss Logs
             <Grid
                 container
                 direction="row"

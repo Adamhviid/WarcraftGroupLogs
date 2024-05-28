@@ -1,14 +1,16 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { Button, TextField, FormControl } from "@mui/material";
 import PropTypes from "prop-types";
 
-/* import exampleRaid from "../data/exampleRaid.json"; */
+import exampleRaid from "../data/exampleRaid.json";
 
-function Search({ setLoading, characters, setCharacters, server, region, zone, setCharacterData }) {
+function Search({ setLoading, characters, setCharacters, version, server, region, zone, setCharacterData }) {
+    const [error, setError] = useState(null);
+
     useEffect(() => {
         setCharacterData([]);
-    }, [server, region, zone]);
+    }, [version, server, region, zone]);
 
     const handleCharactersChange = (event) => {
         setCharacters(event.target.value);
@@ -21,12 +23,20 @@ function Search({ setLoading, characters, setCharacters, server, region, zone, s
         setCharacterData(null);
         const charsArray = characters.split(",").map((name) => name.trim());
 
+        if (charsArray.length > 20) {
+            setError("Character list cannot exceed 20 characters.");
+            return;
+        }
+
+        setError(null);
+
         const promises = charsArray.map(async (name) => {
             const result = await axios({
-                url: `${import.meta.env.VITE_BACKEND_URL}/sod/get_character_data`,
+                url: `${import.meta.env.VITE_BACKEND_URL}/api/get_character_data`,
                 method: "POST",
                 data: {
                     name,
+                    version,
                     server,
                     region,
                     zone,
@@ -35,6 +45,7 @@ function Search({ setLoading, characters, setCharacters, server, region, zone, s
                     "Content-Type": "application/json",
                 },
             });
+            console.log(result.data);
             return result.data;
         });
         const results = await Promise.all(promises);
@@ -44,6 +55,7 @@ function Search({ setLoading, characters, setCharacters, server, region, zone, s
 
     return (
         <>
+            {error && <p style={{ color: "red" }}>{error}</p>}
             <FormControl
                 margin="normal"
                 fullWidth>
@@ -62,17 +74,17 @@ function Search({ setLoading, characters, setCharacters, server, region, zone, s
             <Button
                 variant="contained"
                 onClick={(event) => getCharacterData(event)}
-                disabled={!characters || !server || !region || !zone}
+                disabled={!characters || !version || !server || !region || !zone}
                 type="submit">
                 Search
             </Button>
 
-            {/* <Button
+            <Button
                 variant="contained"
                 type="button"
                 onClick={() => setCharacterData(exampleRaid)}>
                 Use Example Raid
-            </Button> */}
+            </Button>
         </>
     );
 }
@@ -81,6 +93,7 @@ Search.propTypes = {
     setLoading: PropTypes.func.isRequired,
     characters: PropTypes.string.isRequired,
     setCharacters: PropTypes.func.isRequired,
+    version: PropTypes.string.isRequired,
     server: PropTypes.string.isRequired,
     region: PropTypes.string.isRequired,
     zone: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,

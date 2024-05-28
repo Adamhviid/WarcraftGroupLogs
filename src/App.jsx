@@ -10,6 +10,7 @@ function App() {
     const [loading, setLoading] = useState(false);
     const formRef = useRef();
 
+    const [version, setVersion] = useState("");
     const [server, setServer] = useState("");
     const [region, setRegion] = useState("");
     const [zone, setZone] = useState("");
@@ -21,6 +22,7 @@ function App() {
 
     useEffect(() => {
         const queryParams = new URLSearchParams(location.search);
+        setVersion(queryParams.get("version") || "");
         setServer(queryParams.get("server") || "");
         setRegion(queryParams.get("region") || "");
         setZone(queryParams.get("zone") || "");
@@ -29,19 +31,25 @@ function App() {
 
     useEffect(() => {
         const params = new URLSearchParams({
+            version,
             server,
             region,
             zone,
             characters,
         });
         navigate(`?${params}`);
-    }, [server, region, zone, characters, navigate]);
+    }, [version, server, region, zone, characters, navigate]);
 
     const submitForm = (event) => {
         event.preventDefault();
         if (formRef.current) {
             formRef.current.dispatchEvent(new Event("submit", { cancelable: true }));
         }
+    };
+
+    const updateQueryParams = (params) => {
+        const queryParams = new URLSearchParams(params);
+        navigate(`${location.pathname}?${queryParams}`);
     };
 
     return (
@@ -86,6 +94,7 @@ function App() {
                     {loading && "Loading..."}
                     <Result
                         characterData={characterData}
+                        version={version}
                         server={server}
                         region={region}
                         zone={zone}
@@ -106,20 +115,23 @@ function App() {
                                 alignItems: "center",
                                 justifyContent: "center",
                                 padding: "1em",
-                                /* background: "#3f3f3f", */
                             }}>
                             <Filters
+                                version={version}
+                                setVersion={setVersion}
                                 server={server}
                                 setServer={setServer}
                                 region={region}
                                 setRegion={setRegion}
                                 zone={zone}
                                 setZone={setZone}
+                                updateQueryParams={updateQueryParams}
                             />
                             <Search
                                 setLoading={setLoading}
                                 characters={characters}
                                 setCharacters={setCharacters}
+                                version={version}
                                 server={server}
                                 region={region}
                                 zone={zone}

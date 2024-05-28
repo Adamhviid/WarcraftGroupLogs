@@ -11,7 +11,7 @@ import DpsIcon from "../../icons/dps.png";
 import HealerIcon from "../../icons/healer.png";
 import TankIcon from "../../icons/tank.png";
 
-const ResultCard = ({ data, index, server, region, zone }) => {
+const ResultCard = ({ data, index, version, server, region, zone }) => {
     const [currentLogs, setCurrentLogs] = useState();
     const [rolesWithLogs, setRolesWithLogs] = useState([]);
     const results = data[zone].result;
@@ -78,7 +78,7 @@ const ResultCard = ({ data, index, server, region, zone }) => {
                                 color: Classes[results.classID] ? Classes[results.classID].color : "defaultColor",
                             }}>
                             <a
-                                href={`https://sod.warcraftlogs.com/character/${region}/${server}/${data.name}#zone=${zone}`}
+                                href={`https://${version}.warcraftlogs.com/character/${region}/${server}/${data.name}#zone=${zone}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 style={{ color: "inherit", textDecoration: "none" }}>
@@ -121,9 +121,7 @@ const ResultCard = ({ data, index, server, region, zone }) => {
                             colorBasedOnRank={colorBasedOnRank}
                         />
                     ) : (
-                        <Typography>
-                            {data.zone && results.classID === 1 ? "Character have never been logged" : "No logs found for current raid"}
-                        </Typography>
+                        <Typography>{data.zone && results.classID === 1 ? "Character have never been logged" : "No logs found"}</Typography>
                     )}
                 </CardContent>
             )}
@@ -134,6 +132,7 @@ const ResultCard = ({ data, index, server, region, zone }) => {
 ResultCard.propTypes = {
     data: PropTypes.object,
     index: PropTypes.number,
+    version: PropTypes.string,
     server: PropTypes.string,
     region: PropTypes.string,
     zone: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

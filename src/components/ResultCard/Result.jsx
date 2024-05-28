@@ -1,16 +1,15 @@
-import { useState, useEffect } from "react";
+import { /* useState, */ useEffect } from "react";
 import PropTypes from "prop-types";
-import { Grid, Typography } from "@mui/material";
+import { Grid /* Typography */ } from "@mui/material";
 
 import ResultCard from "./ResultCard";
-import WclColors from "../../data/wclColors.json";
+/* import WclColors from "../../data/wclColors.json"; */
 
-function Result({ characterData, server, region, zone }) {
+function Result({ characterData, version, server, region, zone }) {
     /* const [groupBestPerformanceAverage, setGroupBestPerformanceAverage] = useState(null); */
 
     useEffect(() => {
-        if (!characterData) return;
-
+        /* if (!characterData) return; */
         //TODO: make it work for the highest ranking, not only dpsranking
         /* setGroupBestPerformanceAverage(
             characterData.reduce((sum, data) => sum + data[zone].result.dpsRankings.bestPerformanceAverage, 0) / characterData.length
@@ -50,6 +49,7 @@ function Result({ characterData, server, region, zone }) {
                                         key={index}
                                         data={data}
                                         index={index}
+                                        version={version}
                                         server={server}
                                         region={region}
                                         zone={zone}
@@ -66,6 +66,7 @@ function Result({ characterData, server, region, zone }) {
 
 Result.propTypes = {
     characterData: PropTypes.array,
+    version: PropTypes.string,
     server: PropTypes.string,
     region: PropTypes.string,
     zone: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
