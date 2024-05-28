@@ -78,7 +78,9 @@ const ResultCard = ({ data, index, version, server, region, zone }) => {
                                 color: Classes[results.classID] ? Classes[results.classID].color : "defaultColor",
                             }}>
                             <a
-                                href={`https://${version}.warcraftlogs.com/character/${region}/${server}/${data.name}#zone=${zone}`}
+                                href={`https://${version === "retail" ? "" : version + "."}warcraftlogs.com/character/${region}/${server}/${
+                                    data.name
+                                }#zone=${zone}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 style={{ color: "inherit", textDecoration: "none" }}>
