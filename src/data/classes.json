@@ -1,11 +1,11 @@
 {
     "1": {
-        "class": "Warrior",
-        "color": "#C69B6D",
+        "class": "Death Knight",
+        "color": "#C41E3A",
         "specs": [
-            { "name": "Arms", "role": "dps" },
-            { "name": "Fury", "role": "dps" },
-            { "name": "Protection", "role": "tank" }
+            { "name": "Blood", "role": "tank" },
+            { "name": "Frost", "role": "dps" },
+            { "name": "Unholy", "role": "dps" }
         ]
     },
     "2": {
@@ -35,6 +35,15 @@
             { "name": "Fire", "role": "dps" },
             { "name": "Frost", "role": "dps" },
             { "name": "Healer", "role": "healer" }
+        ]
+    },
+    "5": {
+        "class": "Monk",
+        "color": "#00FF98",
+        "specs": [
+            { "name": "Brewmaster", "role": "tank" },
+            { "name": "Mistweaver", "role": "healer" },
+            { "name": "Windwalker", "role": "dps" }
         ]
     },
     "6": {
@@ -92,6 +101,23 @@
             { "name": "Arms", "role": "dps" },
             { "name": "Fury", "role": "dps" },
             { "name": "Protection", "role": "tank" }
+        ]
+    },
+    "12": {
+        "class": "Demon Hunter",
+        "color": "#A330C9",
+        "specs": [
+            { "name": "Havoc", "role": "dps" },
+            { "name": "Vengeance", "role": "tank" }
+        ]
+    },
+    "13": {
+        "class": "Evoker",
+        "color": "#33937F",
+        "specs": [
+            { "name": "Devastation", "role": "dps" },
+            { "name": "Preservation", "role": "healer" },
+            { "name": "Augmentation", "role": "dps" }
         ]
     }
 }
