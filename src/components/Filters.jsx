@@ -14,9 +14,9 @@ import {
     TextField,
 } from "@mui/material";
 
-import sod_image from "../assets/versions/sod.webp";
+/* import sod_image from "../assets/versions/sod.webp";
 import retail_image from "../assets/versions/retail.webp";
-import cata_image from "../assets/versions/cata.webp";
+import cata_image from "../assets/versions/cata.webp"; */
 
 import sod_servers from "../data/servers/sod.json";
 import retail_eu_servers from "../data/servers/retail_eu.json";
@@ -83,8 +83,7 @@ function Filters({ version, setVersion, server, setServer, region, setRegion, zo
         setZone(event.target.value);
     };
 
-    // eslint-disable-next-line react/prop-types
-    const RadioOption = ({ value, src, alt }) => (
+    /* const RadioOption = ({ value, src, alt }) => (
         <Grid item>
             <FormControlLabel
                 value={value}
@@ -101,14 +100,14 @@ function Filters({ version, setVersion, server, setServer, region, setRegion, zo
                             <img
                                 src={src}
                                 alt={alt}
-                                style={{ width: "auto", height: "150px", borderRadius: "50%" /* border: "1px solid black" */ }}
+                                style={{ width: "auto", height: "150px", borderRadius: "50%" }}
                             />
                         }
                     />
                 }
             />
         </Grid>
-    );
+    ); */
 
     return (
         <>
@@ -127,20 +126,20 @@ function Filters({ version, setVersion, server, setServer, region, setRegion, zo
                             value={version}
                             onChange={handleVersionChange}>
                             <Grid container>
-                                <RadioOption
-                                    value="sod"
-                                    src={sod_image}
-                                    alt="Season of Discovery"
+                                <FormControlLabel
+                                    value={"sod"}
+                                    control={<Radio />}
+                                    label={"Season of Discovery"}
                                 />
-                                <RadioOption
-                                    value="classic"
-                                    src={cata_image}
-                                    alt="Cataclysm Classic"
+                                <FormControlLabel
+                                    value={"retail"}
+                                    control={<Radio />}
+                                    label={"Retail"}
                                 />
-                                <RadioOption
-                                    value="retail"
-                                    src={retail_image}
-                                    alt="Retail"
+                                <FormControlLabel
+                                    value={"classic"}
+                                    control={<Radio />}
+                                    label={"Classic Cataclysm"}
                                 />
                             </Grid>
                         </RadioGroup>
