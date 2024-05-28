@@ -24,6 +24,13 @@ function Result({ characterData, version, server, region, zone }) {
         return rankColorObj ? rankColorObj.color : "black";
     } */
 
+    const gridSize = (length) => {
+        if (length <= 10) return 6;
+        if (length <= 20) return 3;
+        if (length <= 25) return 2.4;
+        return 2;
+    };
+
     return (
         <>
             {characterData ? (
@@ -42,7 +49,7 @@ function Result({ characterData, version, server, region, zone }) {
                         {characterData.map((data, index) => (
                             <Grid
                                 item
-                                xs={3}
+                                md={gridSize(characterData.length)}
                                 key={index}>
                                 {data[zone] != null ? (
                                     <ResultCard

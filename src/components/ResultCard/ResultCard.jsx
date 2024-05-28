@@ -93,12 +93,12 @@ const ResultCard = ({ data, index, version, server, region, zone }) => {
                                 }}>
                                 {currentLogs ? "Average: " + currentLogs.bestPerformanceAverage.toFixed(0) : null}
                             </Typography>
-                            <Typography
+                            {/* <Typography
                                 style={{
                                     color: currentLogs ? colorBasedOnRank(currentLogs.medianPerformanceAverage) : "black",
                                 }}>
                                 {currentLogs ? "Median: " + currentLogs.medianPerformanceAverage.toFixed(0) : null}
-                            </Typography>
+                            </Typography> */}
                         </Typography>
 
                         <div style={{ display: "flex", flexDirection: "column" }}>

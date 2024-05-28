@@ -30,7 +30,7 @@ const BossLogs = ({ currentLogs, colorBasedOnRank }) => {
                                         style={{
                                             color: colorBasedOnRank(ranking.rankPercent),
                                         }}>
-                                        {ranking.rankPercent === null ? "N/A" : ranking.rankPercent.toFixed(0)}
+                                        {ranking.rankPercent === null ? "" : ranking.rankPercent.toFixed(0)}
                                     </Typography>
                                 </Grid>
                             </Grid>

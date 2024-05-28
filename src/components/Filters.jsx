@@ -14,7 +14,7 @@ import {
     TextField,
 } from "@mui/material";
 
-import sod_image from "../assets/sod.jpeg";
+import sod_image from "../assets/sod.png";
 import retail_image from "../assets/retail.png";
 import cata_image from "../assets/cata.png";
 
@@ -83,6 +83,33 @@ function Filters({ version, setVersion, server, setServer, region, setRegion, zo
         setZone(event.target.value);
     };
 
+    // eslint-disable-next-line react/prop-types
+    const RadioOption = ({ value, src, alt }) => (
+        <Grid item>
+            <FormControlLabel
+                value={value}
+                control={
+                    <Radio
+                        icon={
+                            <img
+                                src={src}
+                                alt={alt}
+                                style={{ width: "auto", height: "75px" }}
+                            />
+                        }
+                        checkedIcon={
+                            <img
+                                src={src}
+                                alt={alt}
+                                style={{ width: "auto", height: "150px", borderRadius: "50%" /* border: "1px solid black" */ }}
+                            />
+                        }
+                    />
+                }
+            />
+        </Grid>
+    );
+
     return (
         <>
             <Grid
@@ -99,69 +126,23 @@ function Filters({ version, setVersion, server, setServer, region, setRegion, zo
                             row
                             value={version}
                             onChange={handleVersionChange}>
-                            <FormControlLabel
-                                value="sod"
-                                control={
-                                    <Radio
-                                        icon={
-                                            <img
-                                                src={sod_image}
-                                                alt="Season of Discovery"
-                                                style={{ width: "200px", height: "100px" }}
-                                            />
-                                        }
-                                        checkedIcon={
-                                            <img
-                                                src={sod_image}
-                                                alt="Season of Discovery"
-                                                style={{ width: "200px", height: "100px", borderRadius: "50%", border: "1px solid black" }}
-                                            />
-                                        }
-                                    />
-                                }
-                            />
-                            <FormControlLabel
-                                value="classic"
-                                control={
-                                    <Radio
-                                        icon={
-                                            <img
-                                                src={cata_image}
-                                                alt="Cataclysm Classic"
-                                                style={{ width: "200px", height: "100px" }}
-                                            />
-                                        }
-                                        checkedIcon={
-                                            <img
-                                                src={cata_image}
-                                                alt="Cataclysm Classic"
-                                                style={{ width: "200px", height: "100px", borderRadius: "50%", border: "1px solid black" }}
-                                            />
-                                        }
-                                    />
-                                }
-                            />
-                            <FormControlLabel
-                                value="retail"
-                                control={
-                                    <Radio
-                                        icon={
-                                            <img
-                                                src={retail_image}
-                                                alt="Retail"
-                                                style={{ width: "200px", height: "100px" }}
-                                            />
-                                        }
-                                        checkedIcon={
-                                            <img
-                                                src={retail_image}
-                                                alt="Retail"
-                                                style={{ width: "200px", height: "100px", borderRadius: "50%", border: "1px solid black" }}
-                                            />
-                                        }
-                                    />
-                                }
-                            />
+                            <Grid container>
+                                <RadioOption
+                                    value="sod"
+                                    src={sod_image}
+                                    alt="Season of Discovery"
+                                />
+                                <RadioOption
+                                    value="classic"
+                                    src={cata_image}
+                                    alt="Cataclysm Classic"
+                                />
+                                <RadioOption
+                                    value="retail"
+                                    src={retail_image}
+                                    alt="Retail"
+                                />
+                            </Grid>
                         </RadioGroup>
                     </FormControl>
                 </Grid>
