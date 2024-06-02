@@ -121,6 +121,7 @@ const ResultCard = ({ data, index, version, server, region, zone }) => {
                         <BossLogs
                             currentLogs={currentLogs}
                             colorBasedOnRank={colorBasedOnRank}
+                            zone={zone}
                         />
                     ) : (
                         <Typography>{data.zone && results.classID === 1 ? "Character have never been logged" : "No logs found"}</Typography>

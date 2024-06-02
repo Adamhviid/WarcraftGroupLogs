@@ -8,6 +8,7 @@ function Result({ characterData, version, server, region, zone }) {
     /* const [groupBestPerformanceAverage, setGroupBestPerformanceAverage] = useState(null); */
 
     useEffect(() => {
+        console.log(characterData)
         /* if (!characterData) return; */
         //TODO: make it work for the highest ranking, not only dpsranking
         /* setGroupBestPerformanceAverage(
