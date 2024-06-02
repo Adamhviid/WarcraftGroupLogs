@@ -21,7 +21,7 @@ function Search({ setLoading, characters, setCharacters, version, server, region
         setCharacterData(null);
         const charsArray = characters
             .split(",")
-            .map((name) => name.trim())
+            .map((name) => name.trim().toLowerCase())
             .filter((name) => name !== "");
 
         if (charsArray.length > 25) {
