@@ -220,7 +220,7 @@ function Filters({ version, setVersion, server, setServer, region, setRegion, zo
               }}
               options={servers}
               getOptionLabel={(option) => option}
-              isOptionEqualToValue={(option, value) => value === "" || option.replace(" ", "-") === value}
+              isOptionEqualToValue={(option, value) => option === value}
               renderInput={(params) => (
                 <TextField
                   {...params}
