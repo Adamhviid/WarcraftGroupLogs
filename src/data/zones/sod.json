@@ -1,7 +1,7 @@
 [
-  { "name": "Blackfathom Deeps", "id": 2007 },
-  { "name": "Gnomeregan", "id": 2008 },
-  { "name": "Sunken Temple", "id": 2009 },
-  { "name": "Molten Core", "id": 2012 },
-  { "name": "Onyxia", "id": 2011 }
+  { "name": "Blackfathom Deeps", "id": 2007, "hasDifficulties": false },
+  { "name": "Gnomeregan", "id": 2008, "hasDifficulties": false },
+  { "name": "Sunken Temple", "id": 2009, "hasDifficulties": false },
+  { "name": "Molten Core", "id": 2012, "hasDifficulties": true },
+  { "name": "Onyxia", "id": 2011, "hasDifficulties": false }
 ]

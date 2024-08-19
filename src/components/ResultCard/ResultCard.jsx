@@ -11,7 +11,7 @@ import DpsIcon from "../../assets/icons/dps.png";
 import HealerIcon from "../../assets/icons/healer.png";
 import TankIcon from "../../assets/icons/tank.png";
 
-const ResultCard = ({ data, index, version, server, region, zone }) => {
+const ResultCard = ({ data, index, version, server, region, zone, difficulty }) => {
   const [currentLogs, setCurrentLogs] = useState();
   const [rolesWithLogs, setRolesWithLogs] = useState([]);
   const results = data[zone].result;
@@ -78,7 +78,9 @@ const ResultCard = ({ data, index, version, server, region, zone }) => {
                 color: Classes[results.classID] ? Classes[results.classID].color : "defaultColor",
               }}>
               <a
-                href={`https://${version === "retail" ? "" : version + "."}warcraftlogs.com/character/${region}/${server}/${data.name}#zone=${zone}`}
+                href={`https://${version === "retail" ? "" : version + "."}warcraftlogs.com/character/${region}/${server}/${
+                  data.name
+                }#zone=${zone}&difficulty=${difficulty}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ color: "inherit", textDecoration: "none" }}>
@@ -137,6 +139,7 @@ ResultCard.propTypes = {
   server: PropTypes.string,
   region: PropTypes.string,
   zone: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  difficulty: PropTypes.string,
 };
 
 export default ResultCard;

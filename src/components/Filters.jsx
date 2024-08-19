@@ -14,10 +14,6 @@ import {
   TextField,
 } from "@mui/material";
 
-/* import sod_image from "../assets/versions/sod.webp";
-import retail_image from "../assets/versions/retail.webp";
-import cata_image from "../assets/versions/cata.webp"; */
-
 import sod_servers from "../data/servers/sod.json";
 import retail_eu_servers from "../data/servers/retail_eu.json";
 import retail_us_servers from "../data/servers/retail_us.json";
@@ -31,43 +27,53 @@ import classic_zones from "../data/zones/classic.json";
 function Filters({ version, setVersion, server, setServer, region, setRegion, zone, setZone, difficulty, setDifficulty, updateQueryParams }) {
   const [servers, setServers] = useState([]);
   const [zones, setZones] = useState([]);
+  const [selectedZone, setSelectedZone] = useState(null);
 
   useEffect(() => {
+    let newZones = [];
+    let newServers = [];
+
     switch (version) {
       case "sod":
-        setZones(sod_zones);
-        setServers(sod_servers);
+        newZones = sod_zones;
+        newServers = sod_servers;
         break;
 
       case "classic":
-        setZones(classic_zones);
-        setServers(region === "EU" ? classic_eu_servers : classic_us_servers);
+        newZones = classic_zones;
+        newServers = region === "EU" ? classic_eu_servers : classic_us_servers;
         break;
 
       case "retail":
-        setZones(retail_zones);
-        setServers(region === "EU" ? retail_eu_servers : retail_us_servers);
+        newZones = retail_zones;
+        newServers = region === "EU" ? retail_eu_servers : retail_us_servers;
         break;
 
       default:
-        setZones([]);
-        setServers([]);
+        newZones = [];
+        newServers = [];
         break;
     }
-    /* setCurrentZone(zones.find((z) => z.id === zone)?.name || ""); */
+
+    setZones(newZones);
+    setServers(newServers);
+
+    if (!newZones.find((z) => z.id === zone)) {
+      setZone("");
+      setSelectedZone(null);
+    }
   }, [region, version]);
 
   const handleVersionChange = (event) => {
     setVersion(event.target.value);
 
     setServer("");
-    setRegion("");
     setZone("");
     setDifficulty("");
+    setSelectedZone(null);
     updateQueryParams({
       version: event.target.value,
       server: "",
-      region: "",
       zone: "",
       difficulty: "",
     });
@@ -77,49 +83,66 @@ function Filters({ version, setVersion, server, setServer, region, setRegion, zo
     const formattedValue = newValue ? newValue.replace(/\s+/g, "-") : "";
     setServer(formattedValue);
   };
+
   const handleRegionChange = (event) => {
     setRegion(event.target.value);
   };
 
   const handleZoneChange = (event) => {
-    setZone(event.target.value);
+    const selectedZone = zones.find((z) => z.id === event.target.value);
+    if (selectedZone) {
+      setZone(event.target.value);
+      setSelectedZone(selectedZone);
+    } else {
+      setZone("");
+      setSelectedZone(null);
+    }
   };
 
   const handleDifficultyChange = (event) => {
     setDifficulty(event.target.value);
   };
 
-  /* const RadioOption = ({ value, src, alt }) => (
-        <Grid item>
-            <FormControlLabel
-                value={value}
-                control={
-                    <Radio
-                        icon={
-                            <img
-                                src={src}
-                                alt={alt}
-                                style={{ width: "auto", height: "75px" }}
-                            />
-                        }
-                        checkedIcon={
-                            <img
-                                src={src}
-                                alt={alt}
-                                style={{ width: "auto", height: "150px", borderRadius: "50%" }}
-                            />
-                        }
-                    />
-                }
-            />
-        </Grid>
-    ); */
+  const renderDifficultyMenuItems = () => {
+    const difficultyLevels = {
+      //Molten core Specific heat levels
+      2012: [
+        { key: "normal", value: "3", label: "Heat level 1" },
+        { key: "heroic", value: "4", label: "Heat level 2" },
+        { key: "mythic", value: "5", label: "Heat level 3" },
+      ],
+      //cataclysm
+      classic: [
+        { key: "normal", value: "3", label: "Normal" },
+        { key: "heroic", value: "4", label: "Heroic" },
+      ],
+      retail: [
+        { key: "lfr", value: "1", label: "LFR" },
+        { key: "normal", value: "3", label: "Normal" },
+        { key: "heroic", value: "4", label: "Heroic" },
+        { key: "mythic", value: "5", label: "Mythic" },
+      ],
+    };
+
+    const items = difficultyLevels[zone] || difficultyLevels[version] || difficultyLevels.retail;
+
+    return items.map((item) => (
+      <MenuItem
+        key={item.key}
+        value={item.value}>
+        {item.label}
+      </MenuItem>
+    ));
+  };
 
   return (
     <>
       <Grid
         container
         spacing={2}>
+        {/* 
+        VERSION
+         */}
         <Grid
           item
           md={12}>
@@ -151,6 +174,9 @@ function Filters({ version, setVersion, server, setServer, region, setRegion, zo
             </RadioGroup>
           </FormControl>
         </Grid>
+        {/* 
+        REGION
+         */}
         <Grid
           item
           md={2}>
@@ -177,7 +203,9 @@ function Filters({ version, setVersion, server, setServer, region, setRegion, zo
             </RadioGroup>
           </FormControl>
         </Grid>
-
+        {/* 
+        SERVER
+         */}
         <Grid
           item
           md={4}>
@@ -203,9 +231,12 @@ function Filters({ version, setVersion, server, setServer, region, setRegion, zo
             />
           </FormControl>
         </Grid>
+        {/* 
+        ZONE
+         */}
         <Grid
           item
-          md={4}>
+          md={selectedZone && selectedZone.hasDifficulties ? 4 : 6}>
           <FormControl
             margin="normal"
             fullWidth>
@@ -225,36 +256,27 @@ function Filters({ version, setVersion, server, setServer, region, setRegion, zo
             </Select>
           </FormControl>
         </Grid>
-        <Grid
-          item
-          md={2}>
-          <FormControl
-            margin="normal"
-            fullWidth>
-            <InputLabel>Difficulty</InputLabel>
-            <Select
-              disabled={version === ""}
-              value={difficulty}
-              label="difficulty"
-              onChange={handleDifficultyChange}>
-              <MenuItem
-                key={"normal"}
-                value={3}>
-                normal
-              </MenuItem>
-              <MenuItem
-                key={"heroic"}
-                value={4}>
-                heroic
-              </MenuItem>
-              <MenuItem
-                key={"mythic"}
-                value={5}>
-                mythic
-              </MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
+        {/* 
+        DIFFICULTY
+         */}
+        {selectedZone && selectedZone.hasDifficulties ? (
+          <Grid
+            item
+            md={2}>
+            <FormControl
+              margin="normal"
+              fullWidth>
+              <InputLabel>Difficulty</InputLabel>
+              <Select
+                disabled={version === ""}
+                value={difficulty}
+                label="difficulty"
+                onChange={handleDifficultyChange}>
+                {renderDifficultyMenuItems()}
+              </Select>
+            </FormControl>
+          </Grid>
+        ) : null}
       </Grid>
     </>
   );

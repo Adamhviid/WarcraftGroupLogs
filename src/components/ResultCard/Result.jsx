@@ -4,11 +4,10 @@ import { Grid } from "@mui/material";
 
 import ResultCard from "./ResultCard";
 
-function Result({ characterData, version, server, region, zone }) {
+function Result({ characterData, version, server, region, zone, difficulty }) {
     /* const [groupBestPerformanceAverage, setGroupBestPerformanceAverage] = useState(null); */
 
     useEffect(() => {
-        console.log(characterData)
         /* if (!characterData) return; */
         //TODO: make it work for the highest ranking, not only dpsranking
         /* setGroupBestPerformanceAverage(
@@ -32,10 +31,10 @@ function Result({ characterData, version, server, region, zone }) {
     };
 
     return (
-        <>
-            {characterData ? (
-                <div>
-                    {/* <Typography
+      <>
+        {characterData ? (
+          <div>
+            {/* <Typography
                     <span>Whole Raid Best Performance Average: </span>
                         variant="body"
                         style={{
@@ -43,31 +42,32 @@ function Result({ characterData, version, server, region, zone }) {
                         }}>
                         {groupBestPerformanceAverage === null ? "N/A" : groupBestPerformanceAverage.toFixed(0)}
                     </Typography> */}
-                    <Grid
-                        container
-                        spacing={2}>
-                        {characterData.map((data, index) => (
-                            <Grid
-                                item
-                                md={gridSize(characterData.length)}
-                                key={index}>
-                                {data[zone] != null ? (
-                                    <ResultCard
-                                        key={index}
-                                        data={data}
-                                        index={index}
-                                        version={version}
-                                        server={server}
-                                        region={region}
-                                        zone={zone}
-                                    />
-                                ) : null}
-                            </Grid>
-                        ))}
-                    </Grid>
-                </div>
-            ) : null}
-        </>
+            <Grid
+              container
+              spacing={2}>
+              {characterData.map((data, index) => (
+                <Grid
+                  item
+                  md={gridSize(characterData.length)}
+                  key={index}>
+                  {data[zone] != null ? (
+                    <ResultCard
+                      key={index}
+                      data={data}
+                      index={index}
+                      version={version}
+                      server={server}
+                      region={region}
+                      zone={zone}
+                      difficulty={difficulty}
+                    />
+                  ) : null}
+                </Grid>
+              ))}
+            </Grid>
+          </div>
+        ) : null}
+      </>
     );
 }
 
