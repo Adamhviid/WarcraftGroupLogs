@@ -1,5 +1,7 @@
 [
-    { "name": "Blackfathom Deeps", "id": 2007 },
-    { "name": "Gnomeregan", "id": 2008 },
-    { "name": "Sunken Temple", "id": 2009 }
+  { "name": "Blackfathom Deeps", "id": 2007 },
+  { "name": "Gnomeregan", "id": 2008 },
+  { "name": "Sunken Temple", "id": 2009 },
+  { "name": "Molten Core", "id": 2012 },
+  { "name": "Onyxia", "id": 2011 }
 ]
