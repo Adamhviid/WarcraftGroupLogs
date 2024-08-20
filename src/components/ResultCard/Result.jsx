@@ -13,7 +13,7 @@ function Result({ characterData, version, server, region, zone, difficulty }) {
         /* setGroupBestPerformanceAverage(
             characterData.reduce((sum, data) => sum + data[zone].result.dpsRankings.bestPerformanceAverage, 0) / characterData.length
         ); */
-    }, [characterData, server, region]);
+    }, []);
 
     /* function colorBasedOnRank(number) {
         if (number === null) {

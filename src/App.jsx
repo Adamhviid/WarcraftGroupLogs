@@ -41,7 +41,7 @@ function App() {
       characters,
     });
     navigate(`?${params}`);
-  }, [version, server, region, zone, characters, difficulty, navigate]);
+  }, [version, server, region, zone, difficulty, characters, navigate]);
 
   const submitForm = (event) => {
     event.preventDefault();
@@ -68,13 +68,13 @@ function App() {
           variant="p"
           component="div"
           gutterBottom>
-          This Website is built to be used with{" "}
+          This Website is built to be used with my addon,{" "}
           <Link
             href="https://curseforge.com/wow/addons/warcraftgrouplogs"
             target="_blank"
             rel="noopener noreferrer">
             {" "}
-            my addon, WarcraftGroupLogs.
+            WarcraftGroupLogs
           </Link>{" "}
           <p>
             The addon automatically generates a link for this site with region, server, current raid and an array with all party and raid members.

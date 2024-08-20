@@ -8,7 +8,7 @@ function Search({ setLoading, characters, setCharacters, version, server, region
 
   useEffect(() => {
     setCharacterData([]);
-  }, [version, server, region, zone, difficulty]);
+  }, []);
 
   const handleCharactersChange = (event) => {
     setCharacters(event.target.value);
@@ -47,7 +47,7 @@ function Search({ setLoading, characters, setCharacters, version, server, region
           "Content-Type": "application/json",
         },
       });
-      console.log(result.data);
+      /* console.log({ filters: { version, server, region, zone, difficulty }, data: { result } }); */
       return result.data;
     });
     const results = await Promise.all(promises);

@@ -64,6 +64,21 @@ function Filters({ version, setVersion, server, setServer, region, setRegion, zo
     }
   }, [region, version]);
 
+  useEffect(() => {
+    if (selectedZone && selectedZone.hasDifficulties) {
+      const items = renderDifficultyMenuItems();
+      const lowestDifficulty = items.reduce(
+        (minItem, currentItem) => (parseInt(currentItem.props.value) < parseInt(minItem.props.value) ? currentItem : minItem),
+        items[0]
+      );
+      setDifficulty(lowestDifficulty.props.value);
+      updateQueryParams({
+        zone,
+        difficulty: lowestDifficulty.props.value,
+      });
+    }
+  }, [zone, selectedZone]);
+
   const handleVersionChange = (event) => {
     setVersion(event.target.value);
 
@@ -89,36 +104,47 @@ function Filters({ version, setVersion, server, setServer, region, setRegion, zo
   };
 
   const handleZoneChange = (event) => {
-    const selectedZone = zones.find((z) => z.id === event.target.value);
+    const newZoneId = event.target.value;
+    if (newZoneId === zone) return;
+
+    const selectedZone = zones.find((z) => z.id === newZoneId);
+
     if (selectedZone) {
-      setZone(event.target.value);
+      setZone(newZoneId);
       setSelectedZone(selectedZone);
+
       if (!selectedZone.hasDifficulties) {
-        setDifficulty("0");
+        const defaultDifficulty = "3";
+        setDifficulty(defaultDifficulty);
         updateQueryParams({
-          zone: event.target.value,
-          difficulty: "0",
+          zone: newZoneId,
+          difficulty: defaultDifficulty,
         });
       } else {
+        setDifficulty("");
         updateQueryParams({
-          zone: event.target.value,
+          zone: newZoneId,
         });
       }
     } else {
       setZone("");
       setSelectedZone(null);
-      setDifficulty("0");
+      setDifficulty("");
       updateQueryParams({
         zone: "",
-        difficulty: "0",
+        difficulty: "",
       });
     }
   };
 
   const handleDifficultyChange = (event) => {
-    setDifficulty(String(event.target.value));
+    const newDifficulty = String(event.target.value);
+    const validDifficulties = renderDifficultyMenuItems().map((item) => item.props.value);
+    if (!validDifficulties.includes(newDifficulty)) return;
+
+    setDifficulty(newDifficulty);
     updateQueryParams({
-      difficulty: event.target.value,
+      difficulty: newDifficulty,
     });
   };
 
@@ -233,13 +259,13 @@ function Filters({ version, setVersion, server, setServer, region, setRegion, zo
             fullWidth>
             <Autocomplete
               disabled={version === "" || region === ""}
-              value={server}
+              value={server || null}
               onChange={(event, newValue) => {
                 handleServerChange(newValue);
               }}
               options={servers}
               getOptionLabel={(option) => option}
-              isOptionEqualToValue={(option, value) => option === value}
+              isOptionEqualToValue={(option, value) => option === value || option.replace(/\s+/g, "-") === value}
               renderInput={(params) => (
                 <TextField
                   {...params}
@@ -262,7 +288,7 @@ function Filters({ version, setVersion, server, setServer, region, setRegion, zo
             <InputLabel>Zone</InputLabel>
             <Select
               disabled={version === ""}
-              value={zone}
+              value={zones.find((z) => z.id === zone) ? zone : ""}
               label="Zones"
               onChange={handleZoneChange}>
               {zones.map((option) => (
@@ -288,7 +314,7 @@ function Filters({ version, setVersion, server, setServer, region, setRegion, zo
               <InputLabel>Difficulty</InputLabel>
               <Select
                 disabled={version === ""}
-                value={difficulty}
+                value={renderDifficultyMenuItems().find((item) => item.props.value === difficulty) ? difficulty : ""}
                 label="difficulty"
                 onChange={handleDifficultyChange}>
                 {renderDifficultyMenuItems()}
