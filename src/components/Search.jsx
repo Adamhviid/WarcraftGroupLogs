@@ -76,7 +76,7 @@ function Search({ setLoading, characters, setCharacters, version, server, region
       <Button
         variant="contained"
         onClick={(event) => getCharacterData(event)}
-        disabled={!characters || !version || !server || !region || !zone || !difficulty}
+        disabled={!characters || !version || !server || !region || !zone}
         type="submit">
         Search
       </Button>

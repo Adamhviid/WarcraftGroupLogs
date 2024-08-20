@@ -80,7 +80,7 @@ const ResultCard = ({ data, index, version, server, region, zone, difficulty }) 
               <a
                 href={`https://${version === "retail" ? "" : version + "."}warcraftlogs.com/character/${region}/${server}/${
                   data.name
-                }#zone=${zone}&difficulty=${difficulty}`}
+                }?zone=${zone}&difficulty=${difficulty}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ color: "inherit", textDecoration: "none" }}>

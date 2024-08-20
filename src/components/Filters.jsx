@@ -93,14 +93,33 @@ function Filters({ version, setVersion, server, setServer, region, setRegion, zo
     if (selectedZone) {
       setZone(event.target.value);
       setSelectedZone(selectedZone);
+      if (!selectedZone.hasDifficulties) {
+        setDifficulty("0");
+        updateQueryParams({
+          zone: event.target.value,
+          difficulty: "0",
+        });
+      } else {
+        updateQueryParams({
+          zone: event.target.value,
+        });
+      }
     } else {
       setZone("");
       setSelectedZone(null);
+      setDifficulty("0");
+      updateQueryParams({
+        zone: "",
+        difficulty: "0",
+      });
     }
   };
 
   const handleDifficultyChange = (event) => {
-    setDifficulty(event.target.value);
+    setDifficulty(String(event.target.value));
+    updateQueryParams({
+      difficulty: event.target.value,
+    });
   };
 
   const renderDifficultyMenuItems = () => {
