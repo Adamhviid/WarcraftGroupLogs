@@ -108,51 +108,55 @@ function App() {
             onSubmit={(e) => {
               e.preventDefault();
             }}>
-            <Card
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                padding: "1em",
-              }}>
-              <Filters
-                version={version}
-                setVersion={setVersion}
-                server={server}
-                setServer={setServer}
-                region={region}
-                setRegion={setRegion}
-                zone={zone}
-                setZone={setZone}
-                difficulty={difficulty}
-                setDifficulty={setDifficulty}
-                updateQueryParams={updateQueryParams}
-              />
-              <Search
-                setLoading={setLoading}
-                characters={characters}
-                setCharacters={setCharacters}
-                version={version}
-                server={server}
-                region={region}
-                zone={zone}
-                difficulty={difficulty}
-                setDifficulty={setDifficulty}
-                setCharacterData={setCharacterData}
-                submitForm={(event) => submitForm(event)}
-              />
-            </Card>
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center"}}>
+              <Card
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  padding: "1em",
+                  width: "1080px",
+                }}>
+                <Filters
+                  version={version}
+                  setVersion={setVersion}
+                  server={server}
+                  setServer={setServer}
+                  region={region}
+                  setRegion={setRegion}
+                  zone={zone}
+                  setZone={setZone}
+                  difficulty={difficulty}
+                  setDifficulty={setDifficulty}
+                  updateQueryParams={updateQueryParams}
+                />
+                <Search
+                  setLoading={setLoading}
+                  characters={characters}
+                  setCharacters={setCharacters}
+                  version={version}
+                  server={server}
+                  region={region}
+                  zone={zone}
+                  difficulty={difficulty}
+                  setDifficulty={setDifficulty}
+                  setCharacterData={setCharacterData}
+                  submitForm={(event) => submitForm(event)}
+                />
+              </Card>
+            </div>
           </form>
         </Grid>
       </Grid>
+
       <a
         href="https://www.buymeacoffee.com/adamhviid"
         target="_blank">
         <img
-          src="https://cdn.buymeacoffee.com/buttons/v2/arial-yellow.png"
+          src="https://cdn.buymeacoffee.com/buttons/v2/arial-white.png"
           alt="Buy Me A Coffee"
-          style={{ height: "auto", width: "200px", marginTop: "150px" }}
+          style={{ height: "auto", width: "150px", marginTop: "150px" }}
         />
       </a>
     </>

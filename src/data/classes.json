@@ -57,7 +57,7 @@
     },
     "7": {
         "class": "Priest",
-        "color": "#BLACK",
+        "color": "#white",
         "specs": [
             { "name": "Shadow", "role": "dps" },
             { "name": "discipline", "role": "healer" },
