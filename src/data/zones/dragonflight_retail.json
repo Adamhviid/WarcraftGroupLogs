@@ -1,0 +1,9 @@
+[
+  { "name": "Amirdrassil, the Dream's Hope", "id": 35, "hasDifficulties": true },
+  { "name": "Aberrus, the Shadowed Crucible", "id": 33, "hasDifficulties": true },
+  { "name": "Vault of the Incarnates", "id": 31, "hasDifficulties": true },
+  { "name": "Mythic+ Season 4", "id": 37, "hasDifficulties": false },
+  { "name": "Mythic+ Season 3", "id": 36, "hasDifficulties": false },
+  { "name": "Mythic+ Season 2", "id": 34, "hasDifficulties": false },
+  { "name": "Mythic+ Season 1", "id": 32, "hasDifficulties": false }
+]
