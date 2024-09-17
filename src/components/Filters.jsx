@@ -78,6 +78,9 @@ function Filters({ version, setVersion, server, setServer, region, setRegion, zo
       );
       setDifficulty(lowestDifficulty.props.value);
       updateQueryParams({
+        version,
+        server,
+        region,
         zone,
         difficulty: lowestDifficulty.props.value,
       });
