@@ -146,6 +146,15 @@ function App() {
           </form>
         </Grid>
       </Grid>
+      <a
+        href="https://www.buymeacoffee.com/adamhviid"
+        target="_blank">
+        <img
+          src="https://cdn.buymeacoffee.com/buttons/v2/arial-yellow.png"
+          alt="Buy Me A Coffee"
+          style={{ height: "auto", width: "200px", marginTop: "150px" }}
+        />
+      </a>
     </>
   );
 }
