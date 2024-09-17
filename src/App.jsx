@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import Filters from "./components/Filters";
 import Search from "./components/Search";
 import Result from "./components/ResultCard/Result";
+import Loading from "./components/Loading";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -90,7 +91,8 @@ function App() {
         <Grid
           item
           md={12}>
-          {loading && "Loading..."}
+          {/* {loading && "Loading..."} */}
+          <Loading loading={loading} />
           <Result
             characterData={characterData}
             version={version}
@@ -108,7 +110,7 @@ function App() {
             onSubmit={(e) => {
               e.preventDefault();
             }}>
-            <div style={{ display: "flex", justifyContent: "center", alignItems: "center"}}>
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
               <Card
                 sx={{
                   display: "flex",
