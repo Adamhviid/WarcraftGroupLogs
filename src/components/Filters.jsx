@@ -57,12 +57,17 @@ function Filters({ version, setVersion, server, setServer, region, setRegion, zo
 
     setZones(newZones);
     setServers(newServers);
+    const foundZone = newZones.find((z) => z.id == zone);
 
-    if (!newZones.find((z) => z.id === zone)) {
-      setZone("");
+    if (foundZone) {
+      setSelectedZone(foundZone);
+    } else {
+      if (zone !== "") {
+        setZone("");
+      }
       setSelectedZone(null);
     }
-  }, [region, version]);
+  }, [region, version, zone]);
 
   useEffect(() => {
     if (selectedZone && selectedZone.hasDifficulties) {
@@ -288,7 +293,7 @@ function Filters({ version, setVersion, server, setServer, region, setRegion, zo
             <InputLabel>Zone</InputLabel>
             <Select
               disabled={version === ""}
-              value={zones.find((z) => z.id === zone) ? zone : ""}
+              value={zones.find((z) => z.id == zone) ? zone : ""}
               label="Zones"
               onChange={handleZoneChange}>
               {zones.map((option) => (
