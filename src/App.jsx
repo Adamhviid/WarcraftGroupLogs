@@ -69,21 +69,22 @@ function App() {
           variant="p"
           component="div"
           gutterBottom>
-          This Website is built to be used with my addon,{" "}
+          This website is designed to work seamlessly with my addon,{" "}
           <Link
             href="https://curseforge.com/wow/addons/warcraftgrouplogs"
             target="_blank"
             rel="noopener noreferrer">
-            {" "}
             WarcraftGroupLogs
-          </Link>{" "}
+          </Link>
+          .
           <p>
-            The addon automatically generates a link for this site with region, server, current raid and an array with all party and raid members.
+            The addon effortlessly generates a personalized link for this site, automatically fetching your region, server, current raid or group
           </p>
-          <p>Click on any of the players names, to go directly to their WarcraftLogs profile, to see an indepth analysis of their performance</p>
+          <p>Simply click on any player's name to dive straight into their WarcraftLogs profile and get an in-depth analysis of their performance.</p>
         </Typography>
         <br />
       </div>
+
       <Grid
         container
         spacing={2}
@@ -150,17 +151,29 @@ function App() {
             </div>
           </form>
         </Grid>
+        <div
+          style={{
+            bottom: 0,
+            left: 0,
+            right: 0,
+            width: "100%",
+            textAlign: "center",
+            padding: "10px 0",
+          }}>
+          <a
+            href="https://www.buymeacoffee.com/adamhviid"
+            target="_blank"
+            rel="noopener noreferrer">
+            <img
+              src="https://cdn.buymeacoffee.com/buttons/v2/arial-white.png"
+              alt="Buy Me A Coffee"
+              style={{ height: "auto", width: "150px", marginTop: "50px", marginBottom: "-15px" }}
+            />
+          </a>
+          <p>For less than what a store mount cost ;)</p>
+          <p>Let me know if you have any feedback on reddit, github or curseforge</p>
+        </div>
       </Grid>
-
-      <a
-        href="https://www.buymeacoffee.com/adamhviid"
-        target="_blank">
-        <img
-          src="https://cdn.buymeacoffee.com/buttons/v2/arial-white.png"
-          alt="Buy Me A Coffee"
-          style={{ height: "auto", width: "150px", marginTop: "150px" }}
-        />
-      </a>
     </>
   );
 }

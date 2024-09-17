@@ -7,7 +7,7 @@ function Loading({ loading }) {
   useEffect(() => {
     if (loading) {
       const timer = setTimeout(() => {
-        setMessage("Sorry for the delay.\nContacting server, please allow a wait up to 30 seconds.");
+        setMessage("Sorry for the delay. Servers are expensive \nContacting server, please allow a wait up to 30 seconds.");
       }, 10000);
 
       return () => clearTimeout(timer);

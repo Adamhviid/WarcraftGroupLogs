@@ -214,14 +214,14 @@ function Filters({ version, setVersion, server, setServer, region, setRegion, zo
                   label={"Season of Discovery"}
                 />
                 <FormControlLabel
-                  value={"retail"}
-                  control={<Radio />}
-                  label={"Retail"}
-                />
-                <FormControlLabel
                   value={"classic"}
                   control={<Radio />}
                   label={"Classic Cataclysm"}
+                />
+                <FormControlLabel
+                  value={"retail"}
+                  control={<Radio />}
+                  label={"Retail"}
                 />
               </Grid>
             </RadioGroup>
