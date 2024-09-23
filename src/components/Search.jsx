@@ -15,6 +15,7 @@ function Search({ setLoading, characters, setCharacters, version, server, region
   };
 
   async function getCharacterData(event) {
+    let count = 0;
     event.preventDefault();
 
     setLoading(true);
@@ -32,32 +33,45 @@ function Search({ setLoading, characters, setCharacters, version, server, region
     setError(null);
 
     const promises = charsArray.map(async (name) => {
+      let characterName = name;
+      let characterServer = server;
+
+      //in retail characters from different server have a "name-server" like name, therefore split only if names contain "-"
+      if (version === "retail" && name.includes("-")) {
+        [characterName, characterServer] = name.split("-");
+      }
+
+      const requestData = {
+        name: characterName,
+        version,
+        server: characterServer,
+        region,
+        zone,
+        difficulty,
+      };
+
       const result = await axios({
         url: `${import.meta.env.VITE_BACKEND_URL}/api/get_character_data`,
         method: "POST",
-        data: {
-          name,
-          version,
-          server,
-          region,
-          zone,
-          difficulty,
-        },
+        data: requestData,
         headers: {
           "Content-Type": "application/json",
         },
       });
-      /* console.log({ filters: { version, server, region, zone, difficulty }, data: { result } }); */
+      count++;
+
       return result.data;
     });
     const results = await Promise.all(promises);
     setCharacterData(results);
     setLoading(false);
+    console.log(count);
   }
 
   return (
     <>
       {error && <p style={{ color: "red" }}>{error}</p>}
+
       <FormControl
         margin="normal"
         fullWidth>

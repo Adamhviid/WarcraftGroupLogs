@@ -59,7 +59,7 @@ const ResultCard = ({ data, index, version, server, region, zone, difficulty }) 
   return (
     <Card
       key={index}
-      sx={{ background: "#3f3f3f" }}>
+      sx={{ background: "#3f3f3f", minHeight: "145px" }}>
       {!ifNoLogs ? (
         <></>
       ) : (
@@ -68,6 +68,7 @@ const ResultCard = ({ data, index, version, server, region, zone, difficulty }) 
             style={{
               display: "flex",
               justifyContent: "space-between",
+              flexWrap: "wrap",
             }}>
             <Typography
               gutterBottom
@@ -117,15 +118,17 @@ const ResultCard = ({ data, index, version, server, region, zone, difficulty }) 
             </div>
           </div>
 
-          {currentLogs ? (
-            <BossLogs
-              currentLogs={currentLogs}
-              colorBasedOnRank={colorBasedOnRank}
-              zone={zone}
-            />
-          ) : (
-            <Typography>{results.classID === 0 ? "Character not found" : "No logs  for zone"}</Typography>
-          )}
+          <div style={{ width: "100%" }}>
+            {currentLogs ? (
+              <BossLogs
+                currentLogs={currentLogs}
+                colorBasedOnRank={colorBasedOnRank}
+                zone={zone}
+              />
+            ) : (
+              <Typography>{results.classID === 0 ? "Character not found" : "No logs  for zone"}</Typography>
+            )}
+          </div>
         </CardContent>
       )}
     </Card>

@@ -58,37 +58,42 @@ function App() {
 
   return (
     <>
-      <div>
-        <Typography
-          variant="h2"
-          component="div"
-          gutterBottom>
-          Warcraft Group Logs
-        </Typography>
-        <Typography
-          variant="p"
-          component="div"
-          gutterBottom>
-          This website is designed to work seamlessly with my addon,{" "}
-          <Link
-            href="https://curseforge.com/wow/addons/warcraftgrouplogs"
-            target="_blank"
-            rel="noopener noreferrer">
-            WarcraftGroupLogs
-          </Link>
-          .
-          <p>
-            The addon effortlessly generates a personalized link for this site, automatically fetching your region, server, current raid or group
-          </p>
-          <p>Simply click on any player's name to dive straight into their WarcraftLogs profile and get an in-depth analysis of their performance.</p>
-        </Typography>
-        <br />
-      </div>
-
       <Grid
         container
-        spacing={2}
-        alignItems="center">
+        /* spacing={2} */
+        alignItems="center"
+        sx={{ width: "100%" }}>
+        <Grid
+          item
+          md={12}>
+          <Typography
+            variant="h2"
+            component="div"
+            gutterBottom>
+            Warcraft Group Logs
+          </Typography>
+          <Typography
+            variant="p"
+            component="div"
+            gutterBottom>
+            This website is designed to work seamlessly with my addon,{" "}
+            <Link
+              href="https://curseforge.com/wow/addons/warcraftgrouplogs"
+              target="_blank"
+              rel="noopener noreferrer">
+              WarcraftGroupLogs
+            </Link>
+            .
+            <p>
+              The addon effortlessly generates a personalized link for this site, automatically fetching your region, server, current raid or group
+            </p>
+            <p>
+              Simply click on any player's name to dive straight into their WarcraftLogs profile and get an in-depth analysis of their performance.
+            </p>
+          </Typography>
+          <br />
+        </Grid>
+
         <Grid
           item
           md={12}>
@@ -111,7 +116,7 @@ function App() {
             onSubmit={(e) => {
               e.preventDefault();
             }}>
-            <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", padding: "1em" }}>
               <Card
                 sx={{
                   display: "flex",
@@ -119,7 +124,14 @@ function App() {
                   alignItems: "center",
                   justifyContent: "center",
                   padding: "1em",
-                  width: "1080px",
+                  width: {
+                    xs: "100%",
+                    sm: "90%",
+                    md: "80%",
+                    lg: "70%",
+                    xl: "60%",
+                  },
+                  maxWidth: "1080px",
                 }}>
                 <Filters
                   version={version}
@@ -158,7 +170,6 @@ function App() {
             right: 0,
             width: "100%",
             textAlign: "center",
-            padding: "10px 0",
           }}>
           <a
             href="https://www.buymeacoffee.com/adamhviid"

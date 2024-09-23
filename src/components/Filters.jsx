@@ -198,32 +198,32 @@ function Filters({ version, setVersion, server, setServer, region, setRegion, zo
          */}
         <Grid
           item
-          md={12}>
+          xs={12}
+          style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
           <FormControl
             margin="normal"
             component="fieldset">
+            <FormLabel component="legend">Version</FormLabel>
             <RadioGroup
               aria-label="version"
               row
               value={version}
               onChange={handleVersionChange}>
-              <Grid container>
-                <FormControlLabel
-                  value={"sod"}
-                  control={<Radio />}
-                  label={"Season of Discovery"}
-                />
-                <FormControlLabel
-                  value={"classic"}
-                  control={<Radio />}
-                  label={"Classic Cataclysm"}
-                />
-                <FormControlLabel
-                  value={"retail"}
-                  control={<Radio />}
-                  label={"Retail"}
-                />
-              </Grid>
+              <FormControlLabel
+                value={"sod"}
+                control={<Radio />}
+                label={"Season of Discovery"}
+              />
+              <FormControlLabel
+                value={"classic"}
+                control={<Radio />}
+                label={"Classic Cataclysm"}
+              />
+              <FormControlLabel
+                value={"retail"}
+                control={<Radio />}
+                label={"Retail"}
+              />
             </RadioGroup>
           </FormControl>
         </Grid>
@@ -232,6 +232,7 @@ function Filters({ version, setVersion, server, setServer, region, setRegion, zo
          */}
         <Grid
           item
+          xs={12}
           md={2}>
           <FormControl
             disabled={version === ""}
@@ -261,6 +262,7 @@ function Filters({ version, setVersion, server, setServer, region, setRegion, zo
          */}
         <Grid
           item
+          xs={12}
           md={4}>
           <FormControl
             margin="normal"
@@ -289,6 +291,7 @@ function Filters({ version, setVersion, server, setServer, region, setRegion, zo
          */}
         <Grid
           item
+          xs={selectedZone && selectedZone.hasDifficulties ? 7 : 12}
           md={selectedZone && selectedZone.hasDifficulties ? 4 : 6}>
           <FormControl
             margin="normal"
@@ -315,6 +318,7 @@ function Filters({ version, setVersion, server, setServer, region, setRegion, zo
         {selectedZone && selectedZone.hasDifficulties ? (
           <Grid
             item
+            xs={5}
             md={2}>
             <FormControl
               margin="normal"
