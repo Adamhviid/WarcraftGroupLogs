@@ -122,7 +122,7 @@ function Filters({ version, setVersion, server, setServer, region, setRegion, zo
       setSelectedZone(selectedZone);
 
       if (!selectedZone.hasDifficulties) {
-        const defaultDifficulty = "3";
+        const defaultDifficulty = "0";
         setDifficulty(defaultDifficulty);
         updateQueryParams({
           zone: newZoneId,

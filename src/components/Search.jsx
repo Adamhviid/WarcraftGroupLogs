@@ -15,7 +15,6 @@ function Search({ setLoading, characters, setCharacters, version, server, region
   };
 
   async function getCharacterData(event) {
-    let count = 0;
     event.preventDefault();
 
     setLoading(true);
@@ -58,14 +57,12 @@ function Search({ setLoading, characters, setCharacters, version, server, region
           "Content-Type": "application/json",
         },
       });
-      count++;
 
       return result.data;
     });
     const results = await Promise.all(promises);
     setCharacterData(results);
     setLoading(false);
-    console.log(count);
   }
 
   return (

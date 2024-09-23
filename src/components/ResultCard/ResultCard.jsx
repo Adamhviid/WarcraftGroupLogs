@@ -79,9 +79,9 @@ const ResultCard = ({ data, index, version, server, region, zone, difficulty }) 
                 color: Classes[results.classID] ? Classes[results.classID].color : "defaultColor",
               }}>
               <a
-                href={`https://${version === "retail" ? "" : version + "."}warcraftlogs.com/character/${region}/${server}/${
-                  data.name
-                }?zone=${zone}#difficulty=${difficulty}`}
+                href={`https://${version === "retail" ? "" : version + "."}warcraftlogs.com/character/${region}/${server}/${data.name}?zone=${zone}${
+                  zone === 39 ? "" : `#difficulty=${difficulty}`
+                }`}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ color: "inherit", textDecoration: "none" }}>
@@ -92,7 +92,7 @@ const ResultCard = ({ data, index, version, server, region, zone, difficulty }) 
                 style={{
                   color: currentLogs ? colorBasedOnRank(currentLogs.bestPerformanceAverage) : "black",
                 }}>
-                {currentLogs ? "Average: " + currentLogs.bestPerformanceAverage.toFixed(0) : null}
+                {currentLogs ? "Average: " + currentLogs.bestPerformanceAverage.toFixed(1) : null}
               </Typography>
               {/* <Typography
                                 style={{
