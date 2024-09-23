@@ -233,7 +233,8 @@ function Filters({ version, setVersion, server, setServer, region, setRegion, zo
         <Grid
           item
           xs={12}
-          md={2}>
+          md={12}
+          lg={2}>
           <FormControl
             disabled={version === ""}
             margin="normal"
@@ -263,7 +264,8 @@ function Filters({ version, setVersion, server, setServer, region, setRegion, zo
         <Grid
           item
           xs={12}
-          md={4}>
+          md={6}
+          lg={4}>
           <FormControl
             margin="normal"
             fullWidth>

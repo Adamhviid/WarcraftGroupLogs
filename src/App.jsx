@@ -62,7 +62,7 @@ function App() {
         container
         /* spacing={2} */
         alignItems="center"
-        sx={{ width: "100%" }}>
+        sx={{ width: "100%", paddingTop:'10px' }}>
         <Grid
           item
           md={12}>

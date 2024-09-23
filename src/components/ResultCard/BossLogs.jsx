@@ -2,7 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Typography, Grid, Divider } from "@mui/material";
 
-const BossLogs = ({ currentLogs, colorBasedOnRank, zone }) => {
+const BossLogs = ({ currentLogs, colorBasedOnRank }) => {
+  //warcraftlogs rounds down no matter what
+  const roundDown = (num) => {
+    return Math.floor(num);
+  };
+
   return (
     <div>
       <Grid
@@ -35,7 +40,7 @@ const BossLogs = ({ currentLogs, colorBasedOnRank, zone }) => {
                       style={{
                         color: colorBasedOnRank(ranking.rankPercent),
                       }}>
-                      {ranking.rankPercent === null ? "" : ranking.rankPercent.toFixed(0)}
+                      {ranking.rankPercent === null ? "" : roundDown(ranking.rankPercent)}
                     </Typography>
                   </Grid>
                 </Grid>
@@ -51,7 +56,6 @@ const BossLogs = ({ currentLogs, colorBasedOnRank, zone }) => {
 BossLogs.propTypes = {
   currentLogs: PropTypes.object,
   colorBasedOnRank: PropTypes.func,
-  zone: PropTypes.string,
 };
 
 export default BossLogs;
