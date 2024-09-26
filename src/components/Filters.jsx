@@ -24,7 +24,20 @@ import sod_zones from "../data/zones/sod.json";
 import retail_zones from "../data/zones/retail.json";
 import classic_zones from "../data/zones/classic.json";
 
-function Filters({ version, setVersion, server, setServer, region, setRegion, zone, setZone, difficulty, setDifficulty, updateQueryParams }) {
+function Filters({
+  version,
+  setVersion,
+  server,
+  setServer,
+  region,
+  setRegion,
+  zone,
+  setZone,
+  difficulty,
+  setDifficulty,
+  updateQueryParams,
+  characters,
+}) {
   const [servers, setServers] = useState([]);
   const [zones, setZones] = useState([]);
   const [selectedZone, setSelectedZone] = useState(null);
@@ -76,13 +89,20 @@ function Filters({ version, setVersion, server, setServer, region, setRegion, zo
         (minItem, currentItem) => (parseInt(currentItem.props.value) < parseInt(minItem.props.value) ? currentItem : minItem),
         items[0]
       );
-      setDifficulty(lowestDifficulty.props.value);
+
+      if (difficulty == "") {
+        setDifficulty(lowestDifficulty);
+      } else {
+        setDifficulty(difficulty);
+      }
+
       updateQueryParams({
         version,
         server,
         region,
         zone,
-        difficulty: lowestDifficulty.props.value,
+        difficulty: difficulty,
+        characters,
       });
     }
   }, [zone, selectedZone]);
@@ -353,6 +373,7 @@ Filters.propTypes = {
   difficulty: PropTypes.string.isRequired,
   setDifficulty: PropTypes.func.isRequired,
   updateQueryParams: PropTypes.func.isRequired,
+  characters: PropTypes.string.isRequired,
 };
 
 export default Filters;

@@ -62,7 +62,7 @@ function App() {
         container
         /* spacing={2} */
         alignItems="center"
-        sx={{ width: "100%", paddingTop:'10px' }}>
+        sx={{ width: "100%", paddingTop: "10px" }}>
         <Grid
           item
           md={12}>
@@ -142,9 +142,10 @@ function App() {
                   setRegion={setRegion}
                   zone={zone}
                   setZone={setZone}
-                  difficulty={difficulty}
+                  difficulty={difficulty.toString()}
                   setDifficulty={setDifficulty}
                   updateQueryParams={updateQueryParams}
+                  characters={characters}
                 />
                 <Search
                   setLoading={setLoading}
