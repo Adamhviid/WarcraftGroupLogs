@@ -1,5 +1,6 @@
 [
-  { "name": "Heroic Dungeons", "id": 1022, "hasDifficulties": false },
-  { "name": "TotFW & BWD & BoT", "id": 1023, "hasDifficulties": true },
-  { "name": "Baradin Hold", "id": 1024, "hasDifficulties": true }
+  { "name": "Challenge modes", "id": 1039, "hasDifficulties": false },
+  { "name": "Throne of Thunder", "id": 1046, "hasDifficulties": true },
+  { "name": "HoF / ToES", "id": 1040, "hasDifficulties": true },
+  { "name": "Mogu'shan Vaults", "id": 1038, "hasDifficulties": true }
 ]

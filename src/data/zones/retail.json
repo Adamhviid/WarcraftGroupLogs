@@ -1,4 +1,9 @@
 [
+  { "name": "Manaforge Omega", "id": 44, "hasDifficulties": true },
+  { "name": "Liberation of Undermine", "id": 42, "hasDifficulties": true },
+  { "name": "Blackrock Depths", "id": 40, "hasDifficulties": true },
   { "name": "Nerub-ar Palace", "id": 38, "hasDifficulties": true },
+  { "name": "Mythic+ Season 3", "id": 45, "hasDifficulties": false },
+  { "name": "Mythic+ Season 2", "id": 43, "hasDifficulties": false },
   { "name": "Mythic+ Season 1", "id": 39, "hasDifficulties": false }
 ]

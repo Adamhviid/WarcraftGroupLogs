@@ -1,9 +1,29 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, ChangeEvent, FormEvent } from "react";
 import axios from "axios";
 import { Button, TextField, FormControl } from "@mui/material";
-import PropTypes from "prop-types";
 
-function Search({
+export interface SearchProps {
+  setLoading: (loading: boolean) => void;
+  characters: string;
+  setCharacters: (chars: string) => void;
+  version: string;
+  server: string;
+  region: string;
+  zone: number;
+  difficulty: number;
+  setCharacterData: (data: any[] | null) => void;
+}
+
+export interface CharacterRequest {
+  name: string;
+  version: string;
+  server: string;
+  region: string;
+  zone: number;
+  difficulty: number;
+}
+
+export default function Search({
   setLoading,
   characters,
   setCharacters,
@@ -13,18 +33,18 @@ function Search({
   zone,
   difficulty,
   setCharacterData,
-}) {
-  const [error, setError] = useState(null);
+}: SearchProps) {
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     setCharacterData([]);
   }, []);
 
-  const handleCharactersChange = (event) => {
+  const handleCharactersChange = (event: ChangeEvent<HTMLInputElement>) => {
     setCharacters(event.target.value);
   };
 
-  async function getCharacterData(event) {
+  async function getCharacterData(event: FormEvent<HTMLButtonElement>) {
     event.preventDefault();
 
     setLoading(true);
@@ -50,7 +70,7 @@ function Search({
         [characterName, characterServer] = name.split("-");
       }
 
-      const requestData = {
+      const requestData: CharacterRequest = {
         name: characterName,
         version,
         server: characterServer,
@@ -70,6 +90,7 @@ function Search({
 
       return result.data;
     });
+
     const results = await Promise.all(promises);
     setCharacterData(results);
     setLoading(false);
@@ -103,18 +124,3 @@ function Search({
     </>
   );
 }
-
-Search.propTypes = {
-  setLoading: PropTypes.func.isRequired,
-  characters: PropTypes.string.isRequired,
-  setCharacters: PropTypes.func.isRequired,
-  version: PropTypes.string.isRequired,
-  server: PropTypes.string.isRequired,
-  region: PropTypes.string.isRequired,
-  zone: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  difficulty: PropTypes.string.isRequired,
-  setCharacterData: PropTypes.func.isRequired,
-  submitForm: PropTypes.func.isRequired,
-};
-
-export default Search;

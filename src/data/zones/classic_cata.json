@@ -1,0 +1,5 @@
+[
+  { "name": "Heroic Dungeons", "id": 1022, "hasDifficulties": false },
+  { "name": "TotFW & BWD & BoT", "id": 1023, "hasDifficulties": true },
+  { "name": "Baradin Hold", "id": 1024, "hasDifficulties": true }
+]

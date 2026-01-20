@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 
-function Loading({ loading }) {
-  const [message, setMessage] = useState("");
+export interface LoadingProps {
+  loading: boolean;
+}
+
+export default function Loading({ loading }: LoadingProps) {
+  const [message, setMessage] = useState<string>("");
 
   useEffect(() => {
     if (loading) {
       const timer = setTimeout(() => {
         setMessage(
-          "Contacting server, please allow a wait up to 30 seconds. \nSorry for the delay. Servers are expensive",
+          "Contacting server, please allow a wait up to 50 seconds. \nSorry for the delay. Servers are expensive",
         );
       }, 10000);
 
@@ -33,5 +37,3 @@ function Loading({ loading }) {
     </>
   );
 }
-
-export default Loading;

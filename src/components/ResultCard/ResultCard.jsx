@@ -25,6 +25,7 @@ const ResultCard = ({
   const results = data[zone].result;
 
   useEffect(() => {
+    console.log(currentLogs);
     const roles = [
       { label: "dps", icon: DpsIcon },
       { label: "healer", icon: HealerIcon },
@@ -71,7 +72,6 @@ const ResultCard = ({
       results.tankRankings.rankings.length === 0
     );
   }
-
   return (
     <Card key={index} sx={{ background: "#3f3f3f", minHeight: "145px" }}>
       {!ifNoLogs ? (
@@ -98,7 +98,7 @@ const ResultCard = ({
             >
               <a
                 href={`https://${version === "retail" ? "" : version + "."}warcraftlogs.com/character/${region}/${server}/${data.name}?zone=${zone}${
-                  zone === 39 ? "" : `#difficulty=${difficulty}`
+                  difficulty == 0 ? "" : `#difficulty=${difficulty}`
                 }`}
                 target="_blank"
                 rel="noopener noreferrer"

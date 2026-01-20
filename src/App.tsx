@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, FormEvent } from "react";
 import { Card, Grid, Typography, Link } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -7,17 +7,17 @@ import Search from "./components/Search";
 import Result from "./components/ResultCard/Result";
 import Loading from "./components/Loading";
 
-function App() {
-  const [loading, setLoading] = useState(false);
-  const formRef = useRef();
+export default function App() {
+  const [loading, setLoading] = useState<boolean>(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
-  const [version, setVersion] = useState("");
-  const [server, setServer] = useState("");
-  const [region, setRegion] = useState("");
-  const [zone, setZone] = useState("");
-  const [difficulty, setDifficulty] = useState("");
-  const [characters, setCharacters] = useState("");
-  const [characterData, setCharacterData] = useState(null);
+  const [version, setVersion] = useState<string>("");
+  const [server, setServer] = useState<string>("");
+  const [region, setRegion] = useState<string>("");
+  const [zone, setZone] = useState<string>("");
+  const [difficulty, setDifficulty] = useState<string>("");
+  const [characters, setCharacters] = useState<string>("");
+  const [characterData, setCharacterData] = useState<string[] | null>(null);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -44,14 +44,14 @@ function App() {
     navigate(`?${params}`);
   }, [version, server, region, zone, difficulty, characters, navigate]);
 
-  const submitForm = (event) => {
+  const submitForm = (event: React.FormEvent) => {
     event.preventDefault();
     if (formRef.current) {
       formRef.current.dispatchEvent(new Event("submit", { cancelable: true }));
     }
   };
 
-  const updateQueryParams = (params) => {
+  const updateQueryParams = (params: Record<string, string>) => {
     const queryParams = new URLSearchParams(params);
     navigate(`${location.pathname}?${queryParams}`);
   };
@@ -68,7 +68,7 @@ function App() {
           <Typography variant="h2" component="div" gutterBottom>
             Warcraft Group Logs
           </Typography>
-          <Typography variant="p" component="div" gutterBottom>
+          <Typography variant="body1" component="div" gutterBottom>
             This website is designed to work seamlessly with my addon,{" "}
             <Link
               href="https://curseforge.com/wow/addons/warcraftgrouplogs"
@@ -157,11 +157,9 @@ function App() {
                   version={version}
                   server={server}
                   region={region}
-                  zone={zone}
-                  difficulty={difficulty}
-                  setDifficulty={setDifficulty}
+                  zone={Number(zone)}
+                  difficulty={Number(difficulty)}
                   setCharacterData={setCharacterData}
-                  submitForm={(event) => submitForm(event)}
                 />
               </Card>
             </div>
@@ -201,5 +199,3 @@ function App() {
     </>
   );
 }
-
-export default App;

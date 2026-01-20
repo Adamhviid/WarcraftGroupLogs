@@ -14,13 +14,11 @@ import {
   TextField,
 } from "@mui/material";
 
-import sod_servers from "../data/servers/sod.json";
 import retail_eu_servers from "../data/servers/retail_eu.json";
 import retail_us_servers from "../data/servers/retail_us.json";
 import classic_eu_servers from "../data/servers/classic_eu.json";
 import classic_us_servers from "../data/servers/classic_us.json";
 
-import sod_zones from "../data/zones/sod.json";
 import retail_zones from "../data/zones/retail.json";
 import classic_zones from "../data/zones/classic.json";
 
@@ -47,11 +45,6 @@ function Filters({
     let newServers = [];
 
     switch (version) {
-      case "sod":
-        newZones = sod_zones;
-        newServers = sod_servers;
-        break;
-
       case "classic":
         newZones = classic_zones;
         newServers = region === "EU" ? classic_eu_servers : classic_us_servers;
@@ -238,14 +231,14 @@ function Filters({
               onChange={handleVersionChange}
             >
               <FormControlLabel
-                value={"sod"}
+                value={"classic"}
                 control={<Radio />}
-                label={"Season of Discovery"}
+                label={"Classic"}
               />
               <FormControlLabel
                 value={"classic"}
                 control={<Radio />}
-                label={"Classic Cataclysm"}
+                label={"Classic Mist of Pandaria"}
               />
               <FormControlLabel
                 value={"retail"}
