@@ -11,7 +11,15 @@ import DpsIcon from "../../assets/icons/dps.png";
 import HealerIcon from "../../assets/icons/healer.png";
 import TankIcon from "../../assets/icons/tank.png";
 
-const ResultCard = ({ data, index, version, server, region, zone, difficulty }) => {
+const ResultCard = ({
+  data,
+  index,
+  version,
+  server,
+  region,
+  zone,
+  difficulty,
+}) => {
   const [currentLogs, setCurrentLogs] = useState();
   const [rolesWithLogs, setRolesWithLogs] = useState([]);
   const results = data[zone].result;
@@ -31,7 +39,9 @@ const ResultCard = ({ data, index, version, server, region, zone, difficulty }) 
       if (roleRankings && roleRankings.bestPerformanceAverage != null) {
         newRoles.push(role);
 
-        if (roleRankings.bestPerformanceAverage > highestBestPerformanceAverage) {
+        if (
+          roleRankings.bestPerformanceAverage > highestBestPerformanceAverage
+        ) {
           highestBestPerformanceAverage = roleRankings.bestPerformanceAverage;
           setCurrentLogs(roleRankings);
         }
@@ -44,7 +54,9 @@ const ResultCard = ({ data, index, version, server, region, zone, difficulty }) 
     if (number === null) {
       return "black";
     }
-    const rankColorObj = WclColors["rankColors"].find(({ limit }) => number >= limit);
+    const rankColorObj = WclColors["rankColors"].find(
+      ({ limit }) => number >= limit,
+    );
     return rankColorObj ? rankColorObj.color : "black";
   }
 
@@ -53,13 +65,15 @@ const ResultCard = ({ data, index, version, server, region, zone, difficulty }) 
   }
 
   function ifNoLogs() {
-    return !(currentLogs.rankings.length === 0 && results.healerRankings.rankings.length === 0 && results.tankRankings.rankings.length === 0);
+    return !(
+      currentLogs.rankings.length === 0 &&
+      results.healerRankings.rankings.length === 0 &&
+      results.tankRankings.rankings.length === 0
+    );
   }
 
   return (
-    <Card
-      key={index}
-      sx={{ background: "#3f3f3f", minHeight: "145px" }}>
+    <Card key={index} sx={{ background: "#3f3f3f", minHeight: "145px" }}>
       {!ifNoLogs ? (
         <></>
       ) : (
@@ -69,30 +83,40 @@ const ResultCard = ({ data, index, version, server, region, zone, difficulty }) 
               display: "flex",
               justifyContent: "space-between",
               flexWrap: "wrap",
-            }}>
+            }}
+          >
             <Typography
               gutterBottom
               variant="h5"
               component="div"
               style={{
                 fontWeight: "bold",
-                color: Classes[results.classID] ? Classes[results.classID].color : "defaultColor",
-              }}>
+                color: Classes[results.classID]
+                  ? Classes[results.classID].color
+                  : "defaultColor",
+              }}
+            >
               <a
                 href={`https://${version === "retail" ? "" : version + "."}warcraftlogs.com/character/${region}/${server}/${data.name}?zone=${zone}${
                   zone === 39 ? "" : `#difficulty=${difficulty}`
                 }`}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ color: "inherit", textDecoration: "none" }}>
+                style={{ color: "inherit", textDecoration: "none" }}
+              >
                 {data.name}
               </a>
               <Divider />
               <Typography
                 style={{
-                  color: currentLogs ? colorBasedOnRank(currentLogs.bestPerformanceAverage) : "black",
-                }}>
-                {currentLogs ? "Average: " + currentLogs.bestPerformanceAverage.toFixed(1) : null}
+                  color: currentLogs
+                    ? colorBasedOnRank(currentLogs.bestPerformanceAverage)
+                    : "black",
+                }}
+              >
+                {currentLogs
+                  ? "Average: " + currentLogs.bestPerformanceAverage.toFixed(1)
+                  : null}
               </Typography>
               {/* <Typography
                                 style={{
@@ -107,12 +131,17 @@ const ResultCard = ({ data, index, version, server, region, zone, difficulty }) 
                 <a
                   key={index}
                   onClick={() => handleRoleButton(role.label)}
-                  style={{ backgroundColor: "transparent", cursor: "pointer" }}>
-                  <ArrowRightIcon sx={{ color: currentLogs === results[`${role.label}Rankings`] ? "black" : "#3f3f3f" }} />
-                  <img
-                    src={role.icon}
-                    alt={role.label}
+                  style={{ backgroundColor: "transparent", cursor: "pointer" }}
+                >
+                  <ArrowRightIcon
+                    sx={{
+                      color:
+                        currentLogs === results[`${role.label}Rankings`]
+                          ? "black"
+                          : "#3f3f3f",
+                    }}
                   />
+                  <img src={role.icon} alt={role.label} />
                 </a>
               ))}
             </div>
@@ -126,7 +155,11 @@ const ResultCard = ({ data, index, version, server, region, zone, difficulty }) 
                 zone={zone}
               />
             ) : (
-              <Typography>{results.classID === 0 ? "Character not found" : "No logs  for zone"}</Typography>
+              <Typography>
+                {results.classID === 0
+                  ? "Character not found"
+                  : "No logs  for zone"}
+              </Typography>
             )}
           </div>
         </CardContent>

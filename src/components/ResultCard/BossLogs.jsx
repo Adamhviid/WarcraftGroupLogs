@@ -10,27 +10,12 @@ const BossLogs = ({ currentLogs, colorBasedOnRank }) => {
 
   return (
     <div>
-      <Grid
-        container
-        direction="row"
-        wrap="nowrap"
-        justify="space-between">
+      <Grid container direction="row" wrap="nowrap" justify="space-between">
         {currentLogs.rankings.map((ranking, i) => (
           <React.Fragment key={i}>
-            <Grid
-              item
-              key={i}
-              xs={12}
-              sm={6}
-              md={4}
-              lg={3}
-              xl={2}>
-              <Typography
-                variant="body2"
-                component="div">
-                <Grid
-                  container
-                  direction="column">
+            <Grid item key={i} xs={12} sm={6} md={4} lg={3} xl={2}>
+              <Typography variant="body2" component="div">
+                <Grid container direction="column">
                   <Grid item>
                     <Typography variant="body3">{i + 1}</Typography>
                   </Grid>
@@ -39,8 +24,11 @@ const BossLogs = ({ currentLogs, colorBasedOnRank }) => {
                       variant="body2"
                       style={{
                         color: colorBasedOnRank(ranking.rankPercent),
-                      }}>
-                      {ranking.rankPercent === null ? "" : roundDown(ranking.rankPercent)}
+                      }}
+                    >
+                      {ranking.rankPercent === null
+                        ? ""
+                        : roundDown(ranking.rankPercent)}
                     </Typography>
                   </Grid>
                 </Grid>

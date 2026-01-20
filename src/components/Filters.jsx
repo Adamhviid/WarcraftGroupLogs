@@ -86,8 +86,11 @@ function Filters({
     if (selectedZone && selectedZone.hasDifficulties) {
       const items = renderDifficultyMenuItems();
       const lowestDifficulty = items.reduce(
-        (minItem, currentItem) => (parseInt(currentItem.props.value) < parseInt(minItem.props.value) ? currentItem : minItem),
-        items[0]
+        (minItem, currentItem) =>
+          parseInt(currentItem.props.value) < parseInt(minItem.props.value)
+            ? currentItem
+            : minItem,
+        items[0],
       );
 
       if (difficulty == "") {
@@ -167,7 +170,9 @@ function Filters({
 
   const handleDifficultyChange = (event) => {
     const newDifficulty = String(event.target.value);
-    const validDifficulties = renderDifficultyMenuItems().map((item) => item.props.value);
+    const validDifficulties = renderDifficultyMenuItems().map(
+      (item) => item.props.value,
+    );
     if (!validDifficulties.includes(newDifficulty)) return;
 
     setDifficulty(newDifficulty);
@@ -197,12 +202,13 @@ function Filters({
       ],
     };
 
-    const items = difficultyLevels[zone] || difficultyLevels[version] || difficultyLevels.retail;
+    const items =
+      difficultyLevels[zone] ||
+      difficultyLevels[version] ||
+      difficultyLevels.retail;
 
     return items.map((item) => (
-      <MenuItem
-        key={item.key}
-        value={item.value}>
+      <MenuItem key={item.key} value={item.value}>
         {item.label}
       </MenuItem>
     ));
@@ -210,25 +216,27 @@ function Filters({
 
   return (
     <>
-      <Grid
-        container
-        spacing={2}>
+      <Grid container spacing={2}>
         {/* 
         VERSION
          */}
         <Grid
           item
           xs={12}
-          style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-          <FormControl
-            margin="normal"
-            component="fieldset">
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <FormControl margin="normal" component="fieldset">
             <FormLabel component="legend">Version</FormLabel>
             <RadioGroup
               aria-label="version"
               row
               value={version}
-              onChange={handleVersionChange}>
+              onChange={handleVersionChange}
+            >
               <FormControlLabel
                 value={"sod"}
                 control={<Radio />}
@@ -250,45 +258,29 @@ function Filters({
         {/* 
         REGION
          */}
-        <Grid
-          item
-          xs={12}
-          md={12}
-          lg={2}>
+        <Grid item xs={12} md={12} lg={2}>
           <FormControl
             disabled={version === ""}
             margin="normal"
-            component="fieldset">
+            component="fieldset"
+          >
             <FormLabel component="legend">Region</FormLabel>
             <RadioGroup
               aria-label="region"
               value={region}
               onChange={handleRegionChange}
-              row>
-              <FormControlLabel
-                value="US"
-                control={<Radio />}
-                label="US"
-              />
-              <FormControlLabel
-                value="EU"
-                control={<Radio />}
-                label="EU"
-              />
+              row
+            >
+              <FormControlLabel value="US" control={<Radio />} label="US" />
+              <FormControlLabel value="EU" control={<Radio />} label="EU" />
             </RadioGroup>
           </FormControl>
         </Grid>
         {/* 
         SERVER
          */}
-        <Grid
-          item
-          xs={12}
-          md={6}
-          lg={4}>
-          <FormControl
-            margin="normal"
-            fullWidth>
+        <Grid item xs={12} md={6} lg={4}>
+          <FormControl margin="normal" fullWidth>
             <Autocomplete
               disabled={version === "" || region === ""}
               value={server || null}
@@ -297,13 +289,11 @@ function Filters({
               }}
               options={servers}
               getOptionLabel={(option) => option}
-              isOptionEqualToValue={(option, value) => option === value || option.replace(/\s+/g, "-") === value}
+              isOptionEqualToValue={(option, value) =>
+                option === value || option.replace(/\s+/g, "-") === value
+              }
               renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Server"
-                  variant="outlined"
-                />
+                <TextField {...params} label="Server" variant="outlined" />
               )}
             />
           </FormControl>
@@ -314,20 +304,18 @@ function Filters({
         <Grid
           item
           xs={selectedZone && selectedZone.hasDifficulties ? 7 : 12}
-          md={selectedZone && selectedZone.hasDifficulties ? 4 : 6}>
-          <FormControl
-            margin="normal"
-            fullWidth>
+          md={selectedZone && selectedZone.hasDifficulties ? 4 : 6}
+        >
+          <FormControl margin="normal" fullWidth>
             <InputLabel>Zone</InputLabel>
             <Select
               disabled={version === ""}
               value={zones.find((z) => z.id == zone) ? zone : ""}
               label="Zones"
-              onChange={handleZoneChange}>
+              onChange={handleZoneChange}
+            >
               {zones.map((option) => (
-                <MenuItem
-                  key={option.id}
-                  value={option.id}>
+                <MenuItem key={option.id} value={option.id}>
                   {option.name}
                 </MenuItem>
               ))}
@@ -338,19 +326,21 @@ function Filters({
         DIFFICULTY
          */}
         {selectedZone && selectedZone.hasDifficulties ? (
-          <Grid
-            item
-            xs={5}
-            md={2}>
-            <FormControl
-              margin="normal"
-              fullWidth>
+          <Grid item xs={5} md={2}>
+            <FormControl margin="normal" fullWidth>
               <InputLabel>Difficulty</InputLabel>
               <Select
                 disabled={version === ""}
-                value={renderDifficultyMenuItems().find((item) => item.props.value === difficulty) ? difficulty : ""}
+                value={
+                  renderDifficultyMenuItems().find(
+                    (item) => item.props.value === difficulty,
+                  )
+                    ? difficulty
+                    : ""
+                }
                 label="difficulty"
-                onChange={handleDifficultyChange}>
+                onChange={handleDifficultyChange}
+              >
                 {renderDifficultyMenuItems()}
               </Select>
             </FormControl>

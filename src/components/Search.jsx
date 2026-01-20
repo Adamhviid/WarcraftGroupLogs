@@ -3,7 +3,17 @@ import axios from "axios";
 import { Button, TextField, FormControl } from "@mui/material";
 import PropTypes from "prop-types";
 
-function Search({ setLoading, characters, setCharacters, version, server, region, zone, difficulty, setCharacterData }) {
+function Search({
+  setLoading,
+  characters,
+  setCharacters,
+  version,
+  server,
+  region,
+  zone,
+  difficulty,
+  setCharacterData,
+}) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -69,9 +79,7 @@ function Search({ setLoading, characters, setCharacters, version, server, region
     <>
       {error && <p style={{ color: "red" }}>{error}</p>}
 
-      <FormControl
-        margin="normal"
-        fullWidth>
+      <FormControl margin="normal" fullWidth>
         <TextField
           label="Characters"
           value={characters}
@@ -88,7 +96,8 @@ function Search({ setLoading, characters, setCharacters, version, server, region
         variant="contained"
         onClick={(event) => getCharacterData(event)}
         disabled={!characters || !version || !server || !region || !zone}
-        type="submit">
+        type="submit"
+      >
         Search
       </Button>
     </>

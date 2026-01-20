@@ -45,15 +45,10 @@ function Result({ characterData, version, server, region, zone, difficulty }) {
               margin: "0 auto",
               padding: "0 20px 0 0",
               boxSizing: "border-box",
-            }}>
+            }}
+          >
             {characterData.map((data, index) => (
-              <Grid
-                item
-                xs={12}
-                sm={6}
-                md={3}
-                lg={2.4}
-                key={index}>
+              <Grid item xs={12} sm={6} md={3} lg={2.4} key={index}>
                 {data[zone] != null ? (
                   <ResultCard
                     key={index}

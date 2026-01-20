@@ -62,41 +62,37 @@ function App() {
         container
         /* spacing={2} */
         alignItems="center"
-        sx={{ width: "100%", paddingTop: "10px" }}>
-        <Grid
-          item
-          md={12}>
-          <Typography
-            variant="h2"
-            component="div"
-            gutterBottom>
+        sx={{ width: "100%", paddingTop: "10px" }}
+      >
+        <Grid item md={12}>
+          <Typography variant="h2" component="div" gutterBottom>
             Warcraft Group Logs
           </Typography>
-          <Typography
-            variant="p"
-            component="div"
-            gutterBottom>
+          <Typography variant="p" component="div" gutterBottom>
             This website is designed to work seamlessly with my addon,{" "}
             <Link
               href="https://curseforge.com/wow/addons/warcraftgrouplogs"
               target="_blank"
-              rel="noopener noreferrer">
+              rel="noopener noreferrer"
+            >
               WarcraftGroupLogs
             </Link>
             .
             <p>
-              The addon effortlessly generates a personalized link for this site, automatically fetching your region, server, current raid or group
+              The addon effortlessly generates a personalized link for this
+              site, automatically fetching your region, server, current raid or
+              group
             </p>
             <p>
-              Simply click on any player's name to dive straight into their WarcraftLogs profile and get an in-depth analysis of their performance.
+              Simply click on any player's name to dive straight into their
+              WarcraftLogs profile and get an in-depth analysis of their
+              performance.
             </p>
           </Typography>
           <br />
         </Grid>
 
-        <Grid
-          item
-          md={12}>
+        <Grid item md={12}>
           {/* {loading && "Loading..."} */}
           <Loading loading={loading} />
           <Result
@@ -108,15 +104,21 @@ function App() {
             difficulty={difficulty}
           />
         </Grid>
-        <Grid
-          item
-          md={12}>
+        <Grid item md={12}>
           <form
             ref={formRef}
             onSubmit={(e) => {
               e.preventDefault();
-            }}>
-            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", padding: "1em" }}>
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                padding: "1em",
+              }}
+            >
               <Card
                 sx={{
                   display: "flex",
@@ -132,7 +134,8 @@ function App() {
                     xl: "60%",
                   },
                   maxWidth: "1080px",
-                }}>
+                }}
+              >
                 <Filters
                   version={version}
                   setVersion={setVersion}
@@ -171,19 +174,28 @@ function App() {
             right: 0,
             width: "100%",
             textAlign: "center",
-          }}>
+          }}
+        >
           <a
             href="https://www.buymeacoffee.com/adamhviid"
             target="_blank"
-            rel="noopener noreferrer">
+            rel="noopener noreferrer"
+          >
             <img
               src="https://cdn.buymeacoffee.com/buttons/v2/arial-white.png"
               alt="Buy Me A Coffee"
-              style={{ height: "auto", width: "150px", marginTop: "50px", marginBottom: "-15px" }}
+              style={{
+                height: "auto",
+                width: "150px",
+                marginTop: "50px",
+                marginBottom: "-15px",
+              }}
             />
           </a>
           <p>For less than what a store mount cost ;)</p>
-          <p>Let me know if you have any feedback on reddit, github or curseforge</p>
+          <p>
+            Let me know if you have any feedback on reddit, github or curseforge
+          </p>
         </div>
       </Grid>
     </>
