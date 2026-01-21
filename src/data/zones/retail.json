@@ -1,9 +1,32 @@
 [
-  { "name": "Manaforge Omega", "id": 44, "hasDifficulties": true },
-  { "name": "Liberation of Undermine", "id": 42, "hasDifficulties": true },
-  { "name": "Blackrock Depths", "id": 40, "hasDifficulties": true },
-  { "name": "Nerub-ar Palace", "id": 38, "hasDifficulties": true },
-  { "name": "Mythic+ Season 3", "id": 45, "hasDifficulties": false },
-  { "name": "Mythic+ Season 2", "id": 43, "hasDifficulties": false },
-  { "name": "Mythic+ Season 1", "id": 39, "hasDifficulties": false }
+  {
+    "The War Within": [
+      { "name": "Manaforge Omega", "id": 44, "hasDifficulties": true },
+      { "name": "Liberation of Undermine", "id": 42, "hasDifficulties": true },
+      { "name": "Blackrock Depths", "id": 40, "hasDifficulties": true },
+      { "name": "Nerub-ar Palace", "id": 38, "hasDifficulties": true },
+      { "name": "Mythic+ Season 3", "id": 45, "hasDifficulties": false },
+      { "name": "Mythic+ Season 2", "id": 43, "hasDifficulties": false },
+      { "name": "Mythic+ Season 1", "id": 39, "hasDifficulties": false }
+    ]
+  },
+  {
+    "Dragonflight": [
+      {
+        "name": "Amirdrassil, the Dream's Hope",
+        "id": 35,
+        "hasDifficulties": true
+      },
+      {
+        "name": "Aberrus, the Shadowed Crucible",
+        "id": 33,
+        "hasDifficulties": true
+      },
+      { "name": "Vault of the Incarnates", "id": 31, "hasDifficulties": true },
+      { "name": "Mythic+ Season 4", "id": 37, "hasDifficulties": false },
+      { "name": "Mythic+ Season 3", "id": 36, "hasDifficulties": false },
+      { "name": "Mythic+ Season 2", "id": 34, "hasDifficulties": false },
+      { "name": "Mythic+ Season 1", "id": 32, "hasDifficulties": false }
+    ]
+  }
 ]

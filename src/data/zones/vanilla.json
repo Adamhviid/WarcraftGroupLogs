@@ -1,0 +1,13 @@
+[
+  {
+    "Vanilla": [
+      { "name": "Naxxramas", "id": 2006, "hasDifficulties": false },
+      { "name": "Temple of Ahn'Qiraj", "id": 2005, "hasDifficulties": false },
+      { "name": "Ruins of Ahn'Qiraj", "id": 2004, "hasDifficulties": false },
+      { "name": "Zul'Gurub", "id": 2003, "hasDifficulties": false },
+      { "name": "Blackwing Lair", "id": 2002, "hasDifficulties": false },
+      { "name": "Onyxia", "id": 2001, "hasDifficulties": false },
+      { "name": "Molten Core", "id": 2000, "hasDifficulties": false }
+    ]
+  }
+]

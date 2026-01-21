@@ -1,0 +1,13 @@
+[
+  {
+    "Vanilla": [
+      { "name": "Naxxramas", "id": 1036, "hasDifficulties": false },
+      { "name": "Temple of Ahn'Qiraj", "id": 1035, "hasDifficulties": false },
+      { "name": "Blackwing Lair", "id": 1034, "hasDifficulties": false },
+      { "name": "Ruins of Ahn'Qiraj", "id": 1031, "hasDifficulties": false },
+      { "name": "Zul'Gurub", "id": 1030, "hasDifficulties": false },
+      { "name": "Onyxia", "id": 1029, "hasDifficulties": false },
+      { "name": "Molten Core", "id": 1028, "hasDifficulties": false }
+    ]
+  }
+]

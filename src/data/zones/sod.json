@@ -1,9 +1,13 @@
 [
-  { "name": "Blackfathom Deeps", "id": 2007, "hasDifficulties": false },
-  { "name": "Gnomeregan", "id": 2008, "hasDifficulties": false },
-  { "name": "Sunken Temple", "id": 2009, "hasDifficulties": false },
-  { "name": "Molten Core", "id": 2012, "hasDifficulties": true },
-  { "name": "Onyxia", "id": 2011, "hasDifficulties": false },
-  { "name": "Blackwing Lair", "id": 2013, "hasDifficulties": false },
-  { "name": "Zul'Gurub", "id": 2014, "hasDifficulties": false }
+  {
+    "Season of Discovery": [
+      { "name": "Blackfathom Deeps", "id": 2007, "hasDifficulties": false },
+      { "name": "Gnomeregan", "id": 2008, "hasDifficulties": false },
+      { "name": "Sunken Temple", "id": 2009, "hasDifficulties": false },
+      { "name": "Molten Core", "id": 2012, "hasDifficulties": true },
+      { "name": "Onyxia", "id": 2011, "hasDifficulties": false },
+      { "name": "Blackwing Lair", "id": 2013, "hasDifficulties": false },
+      { "name": "Zul'Gurub", "id": 2014, "hasDifficulties": false }
+    ]
+  }
 ]

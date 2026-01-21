@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import {
   InputLabel,
   MenuItem,
@@ -16,11 +15,22 @@ import {
 
 import retail_eu_servers from "../data/servers/retail_eu.json";
 import retail_us_servers from "../data/servers/retail_us.json";
-import classic_eu_servers from "../data/servers/classic_eu.json";
-import classic_us_servers from "../data/servers/classic_us.json";
-
 import retail_zones from "../data/zones/retail.json";
+
+import vanilla_eu_servers from "../data/servers/vanilla_eu.json";
+import vanilla_us_servers from "../data/servers/vanilla_us.json";
+import vanilla_zones from "../data/zones/vanilla.json";
+
+import fresh_eu_servers from "../data/servers/fresh_eu.json";
+import fresh_us_servers from "../data/servers/fresh_us.json";
+import fresh_zones from "../data/zones/fresh.json";
+
+import sod_eu_servers from "../data/servers/sod_eu.json";
+import sod_us_servers from "../data/servers/sod_us.json";
+import sod_zones from "../data/zones/sod.json";
+
 import classic_zones from "../data/zones/classic.json";
+import classic_eu_servers from "../data/servers/classic_eu.json";
 
 function Filters({
   version,
@@ -37,43 +47,84 @@ function Filters({
   characters,
 }) {
   const [servers, setServers] = useState([]);
+  const [expansionsData, setExpansionsData] = useState([]);
+  const [selectedExpansion, setSelectedExpansion] = useState("");
   const [zones, setZones] = useState([]);
   const [selectedZone, setSelectedZone] = useState(null);
 
   useEffect(() => {
-    let newZones = [];
+    let newExpansionsData = [];
     let newServers = [];
 
     switch (version) {
-      case "classic":
-        newZones = classic_zones;
-        newServers = region === "EU" ? classic_eu_servers : classic_us_servers;
-        break;
-
       case "retail":
-        newZones = retail_zones;
+        newExpansionsData = retail_zones;
         newServers = region === "EU" ? retail_eu_servers : retail_us_servers;
         break;
 
+      case "vanilla":
+        newExpansionsData = vanilla_zones;
+        newServers = region === "EU" ? vanilla_eu_servers : vanilla_us_servers;
+        break;
+
+      case "fresh":
+        newExpansionsData = fresh_zones;
+        newServers = region === "EU" ? fresh_eu_servers : fresh_us_servers;
+        break;
+
+      case "sod":
+        newExpansionsData = sod_zones;
+        newServers = region === "EU" ? sod_eu_servers : sod_us_servers;
+        break;
+
+      /* MANGLER STADIG US SERVERE */
+      case "classic":
+        newExpansionsData = classic_zones;
+        newServers = region === "EU" ? classic_eu_servers : classic_eu_servers;
+        break;
+
       default:
-        newZones = [];
+        newExpansionsData = [];
         newServers = [];
         break;
     }
 
-    setZones(newZones);
+    setExpansionsData(newExpansionsData);
     setServers(newServers);
-    const foundZone = newZones.find((z) => z.id == zone);
 
-    if (foundZone) {
-      setSelectedZone(foundZone);
+    if (newExpansionsData.length > 0) {
+      const firstExpansionName = Object.keys(newExpansionsData[0])[0];
+      setSelectedExpansion(firstExpansionName);
     } else {
-      if (zone !== "") {
-        setZone("");
+      setSelectedExpansion("");
+    }
+  }, [region, version]);
+
+  useEffect(() => {
+    if (selectedExpansion && expansionsData.length > 0) {
+      const expansionObj = expansionsData.find(
+        (exp) => Object.keys(exp)[0] === selectedExpansion,
+      );
+
+      if (expansionObj) {
+        const newZones = expansionObj[selectedExpansion];
+        setZones(newZones);
+
+        const foundZone = newZones.find((z) => z.id == zone);
+        if (foundZone) {
+          setSelectedZone(foundZone);
+        } else {
+          if (zone !== "") {
+            setZone("");
+          }
+          setSelectedZone(null);
+        }
       }
+    } else {
+      setZones([]);
       setSelectedZone(null);
     }
-  }, [region, version, zone]);
+  }, [selectedExpansion, expansionsData, zone]);
 
   useEffect(() => {
     if (selectedZone && selectedZone.hasDifficulties) {
@@ -110,6 +161,7 @@ function Filters({
     setZone("");
     setDifficulty("");
     setSelectedZone(null);
+    setSelectedExpansion("");
     updateQueryParams({
       version: event.target.value,
       server: "",
@@ -125,6 +177,18 @@ function Filters({
 
   const handleRegionChange = (event) => {
     setRegion(event.target.value);
+  };
+
+  const handleExpansionChange = (event) => {
+    const newExpansion = event.target.value;
+    setSelectedExpansion(newExpansion);
+    setZone("");
+    setDifficulty("");
+    setSelectedZone(null);
+    updateQueryParams({
+      zone: "",
+      difficulty: "",
+    });
   };
 
   const handleZoneChange = (event) => {
@@ -207,12 +271,14 @@ function Filters({
     ));
   };
 
+  const getExpansionNames = () => {
+    return expansionsData.map((exp) => Object.keys(exp)[0]);
+  };
+
   return (
     <>
       <Grid container spacing={2}>
-        {/* 
-        VERSION
-         */}
+        {/* VERSION */}
         <Grid
           item
           xs={12}
@@ -231,14 +297,24 @@ function Filters({
               onChange={handleVersionChange}
             >
               <FormControlLabel
-                value={"classic"}
+                value={"fresh"}
                 control={<Radio />}
-                label={"Classic"}
+                label={"Classic Fresh Anniversary"}
+              />
+              <FormControlLabel
+                value={"sod"}
+                control={<Radio />}
+                label={"Season of Discovery"}
+              />
+              <FormControlLabel
+                value={"vanilla"}
+                control={<Radio />}
+                label={"Vanilla Era"}
               />
               <FormControlLabel
                 value={"classic"}
                 control={<Radio />}
-                label={"Classic Mist of Pandaria"}
+                label={"Mist of Pandaria"}
               />
               <FormControlLabel
                 value={"retail"}
@@ -248,10 +324,9 @@ function Filters({
             </RadioGroup>
           </FormControl>
         </Grid>
-        {/* 
-        REGION
-         */}
-        <Grid item xs={12} md={12} lg={2}>
+
+        {/* REGION */}
+        <Grid item xs={12} md={12} lg={3}>
           <FormControl
             disabled={version === ""}
             margin="normal"
@@ -269,9 +344,8 @@ function Filters({
             </RadioGroup>
           </FormControl>
         </Grid>
-        {/* 
-        SERVER
-         */}
+
+        {/* SERVER */}
         <Grid item xs={12} md={6} lg={4}>
           <FormControl margin="normal" fullWidth>
             <Autocomplete
@@ -291,18 +365,36 @@ function Filters({
             />
           </FormControl>
         </Grid>
-        {/* 
-        ZONE
-         */}
+
+        {/* EXPANSION */}
+        <Grid item xs={12} md={6} lg={4}>
+          <FormControl margin="normal" fullWidth>
+            <InputLabel>Expansion</InputLabel>
+            <Select
+              disabled={version === ""}
+              value={selectedExpansion}
+              label="Expansion"
+              onChange={handleExpansionChange}
+            >
+              {getExpansionNames().map((expansionName) => (
+                <MenuItem key={expansionName} value={expansionName}>
+                  {expansionName}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Grid>
+
+        {/* ZONE */}
         <Grid
           item
           xs={selectedZone && selectedZone.hasDifficulties ? 7 : 12}
-          md={selectedZone && selectedZone.hasDifficulties ? 4 : 6}
+          md={selectedZone && selectedZone.hasDifficulties ? 10 : 12}
         >
           <FormControl margin="normal" fullWidth>
             <InputLabel>Zone</InputLabel>
             <Select
-              disabled={version === ""}
+              disabled={version === "" || !selectedExpansion}
               value={zones.find((z) => z.id == zone) ? zone : ""}
               label="Zones"
               onChange={handleZoneChange}
@@ -315,9 +407,8 @@ function Filters({
             </Select>
           </FormControl>
         </Grid>
-        {/* 
-        DIFFICULTY
-         */}
+
+        {/* DIFFICULTY */}
         {selectedZone && selectedZone.hasDifficulties ? (
           <Grid item xs={5} md={2}>
             <FormControl margin="normal" fullWidth>
@@ -343,20 +434,5 @@ function Filters({
     </>
   );
 }
-
-Filters.propTypes = {
-  version: PropTypes.string.isRequired,
-  setVersion: PropTypes.func.isRequired,
-  server: PropTypes.string.isRequired,
-  setServer: PropTypes.func.isRequired,
-  region: PropTypes.string.isRequired,
-  setRegion: PropTypes.func.isRequired,
-  zone: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  setZone: PropTypes.func.isRequired,
-  difficulty: PropTypes.string.isRequired,
-  setDifficulty: PropTypes.func.isRequired,
-  updateQueryParams: PropTypes.func.isRequired,
-  characters: PropTypes.string.isRequired,
-};
 
 export default Filters;

@@ -165,7 +165,7 @@ export default function App() {
             </div>
           </form>
         </Grid>
-        <div
+        {/* <div
           style={{
             bottom: 0,
             left: 0,
@@ -194,7 +194,7 @@ export default function App() {
           <p>
             Let me know if you have any feedback on reddit, github or curseforge
           </p>
-        </div>
+        </div> */}
       </Grid>
     </>
   );
