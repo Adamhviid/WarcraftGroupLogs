@@ -1,5 +1,11 @@
 [
   {
+    "The Burning Crusade": [
+      { "name": "Gruul / Magtheridon", "id": 1048, "hasDifficulties": false },
+      { "name": "Karazhan", "id": 1047, "hasDifficulties": false }
+    ]
+  },
+  {
     "Vanilla": [
       { "name": "Naxxramas", "id": 1036, "hasDifficulties": false },
       { "name": "Temple of Ahn'Qiraj", "id": 1035, "hasDifficulties": false },

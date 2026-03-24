@@ -1,5 +1,8 @@
 [
   {
+    "Midnight": [{ "name": "VS / DR / MQD", "id": 46, "hasDifficulties": true }]
+  },
+  {
     "The War Within": [
       { "name": "Manaforge Omega", "id": 44, "hasDifficulties": true },
       { "name": "Liberation of Undermine", "id": 42, "hasDifficulties": true },
