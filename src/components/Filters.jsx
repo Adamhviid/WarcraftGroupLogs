@@ -301,11 +301,11 @@ function Filters({
                 control={<Radio />}
                 label={"Classic Fresh Anniversary"}
               />
-              <FormControlLabel
+              {/* <FormControlLabel
                 value={"sod"}
                 control={<Radio />}
                 label={"Season of Discovery"}
-              />
+              /> */}
               <FormControlLabel
                 value={"vanilla"}
                 control={<Radio />}

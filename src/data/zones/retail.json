@@ -1,6 +1,9 @@
 [
   {
-    "Midnight": [{ "name": "VS / DR / MQD", "id": 46, "hasDifficulties": true }]
+    "Midnight": [
+      { "name": "VS / DR / MQD", "id": 46, "hasDifficulties": true },
+      { "name": "Mythic+ Season 1", "id": 47, "hasDifficulties": false }
+    ]
   },
   {
     "The War Within": [
